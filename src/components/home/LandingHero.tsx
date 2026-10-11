@@ -45,7 +45,7 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
         }}
       >
         <img
-          src="/src/assets/images/pandora_cluster_sharp_1791737058239.jpg"
+          src="/assets/images/pandora_cluster_sharp_1791737058239.jpg"
           alt="Pandora Cluster (Abell 2744) Deep Field - Crystal Sharp JWST View"
           className="w-full h-full object-cover object-center scale-105"
           loading="eager"

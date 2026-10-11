@@ -205,7 +205,7 @@ export const CosmosExploreGrid: React.FC<CosmosExploreGridProps> = ({
       title: "Pandora's Cluster (Abell 2744)",
       subtitle: 'Trillion-Solar-Mass Gravitational Lens',
       shortDesc: "A colossal cosmic megastructure forged from the collision of four galaxy clusters. Its monumental gravity bends space into luminous Einstein arcs, magnifying the earliest infant galaxies from cosmic dawn.",
-      image: '/src/assets/images/galaxy_cluster_deepfield_1791711670367.jpg',
+      image: '/assets/images/galaxy_cluster_deepfield_1791711670367.jpg',
       metrics: '3.98 Billion Ly • 10¹⁵ M☉ • Redshift z=0.308',
       onAction: () => onNavigateToChapter('episode-08'),
       actionText: 'Read Episode 08: Galaxy Clusters & Gravitational Lenses',
@@ -220,7 +220,7 @@ export const CosmosExploreGrid: React.FC<CosmosExploreGridProps> = ({
       title: 'The Supernova Crucible',
       subtitle: 'Core-Collapse & Stellar Nucleosynthesis',
       shortDesc: "The catastrophic detonation of an iron-exhausted massive star. Blasting outward at 30,000 km/s, its relativistic shockwave forges and distributes the universe's gold, platinum, and iodine across space.",
-      image: '/src/assets/images/supernova_cosmic_explosion_1791711683777.jpg',
+      image: '/assets/images/supernova_cosmic_explosion_1791711683777.jpg',
       metrics: '10⁴⁴ Joules • 100B Kelvin • 30,000 km/s Blast',
       onAction: () => onNavigateToChapter('episode-07'),
       actionText: 'Read Episode 07: The Supernova Crucible',
@@ -235,7 +235,7 @@ export const CosmosExploreGrid: React.FC<CosmosExploreGridProps> = ({
       title: 'The Bullet Cluster (1E 0657-56)',
       subtitle: 'Direct Empirical Proof of Dark Matter',
       shortDesc: "Two massive clusters smashed through each other at 4,500 km/s. Supersonic shock fronts dragged ordinary gas behind, while collisionless dark matter ghosted straight through without friction.",
-      image: '/src/assets/images/galaxy_cluster_collision_1791711722403.jpg',
+      image: '/assets/images/galaxy_cluster_collision_1791711722403.jpg',
       metrics: '3.7 Billion Ly • Mach 3 Bow Shock • Dark Matter Core',
       onAction: () => onNavigateToChapter('episode-09'),
       actionText: 'Read Episode 09: Cosmic Collisions & Bullet Cluster',
@@ -250,7 +250,7 @@ export const CosmosExploreGrid: React.FC<CosmosExploreGridProps> = ({
       title: 'Crab Nebula & Pulsar (M1)',
       subtitle: 'Relic of the 1054 CE Guest Star',
       shortDesc: "Intricate gossamer filigree of ionized oxygen and hydrogen expanding from a core collapse. At the heart spins a dense neutron star rotating 30.2 times a second, whipping synchrotron magnetic rings into space.",
-      image: '/src/assets/images/supernova_remnant_veil_1791711709434.jpg',
+      image: '/assets/images/supernova_remnant_veil_1791711709434.jpg',
       metrics: '6,500 Ly • 30.2 Hz Spin • 10 Light-Year Shroud',
       onAction: () => onNavigateToStarMap({ dsoId: 'm1' }),
       actionText: 'Inspect in 3D Star Map',
@@ -265,7 +265,7 @@ export const CosmosExploreGrid: React.FC<CosmosExploreGridProps> = ({
       title: 'The Milky Way',
       subtitle: 'Barred Spiral & Density Wave Crests',
       shortDesc: "Our home galaxy spanning 100,000 light-years, harboring over 100 billion stars. Dynamic density waves compress star-forming clouds along the Perseus and Sagittarius arms around Sagittarius A*.",
-      image: '/src/assets/images/spiral_galaxy_core_1791661096182.jpg',
+      image: '/assets/images/spiral_galaxy_core_1791661096182.jpg',
       metrics: '100,000 Ly Across • 400B Stars • 230 km/s Orbit',
       onAction: () => onNavigateToChapter('episode-03'),
       actionText: 'Read Episode 03: The Barred Spiral',
@@ -280,7 +280,7 @@ export const CosmosExploreGrid: React.FC<CosmosExploreGridProps> = ({
       title: 'Gravitational Singularities',
       subtitle: 'Sagittarius A* & The Horizon Threshold',
       shortDesc: "Where spacetime curvature becomes extreme and escape velocity exceeds light speed. Superheated accretion plasma whirls at relativistic speeds, gravitationally warped into luminous photon rings.",
-      image: '/src/assets/images/supermassive_black_hole_1791661107412.jpg',
+      image: '/assets/images/supermassive_black_hole_1791661107412.jpg',
       metrics: '4.15M Solar Masses • 12M km Horizon • Relativistic Jet',
       onAction: () => onNavigateToChapter('episode-04'),
       actionText: 'Read Episode 04: Singularities',
@@ -295,7 +295,7 @@ export const CosmosExploreGrid: React.FC<CosmosExploreGridProps> = ({
       title: 'Stellar Nurseries (M42)',
       subtitle: 'Great Orion Nebula & Protostellar Disks',
       shortDesc: "A vast interstellar cauldron where gravitational Jeans collapse compresses cold molecular clouds into protostellar cores, triggering first thermonuclear light.",
-      image: '/src/assets/images/cosmic_stellar_nebula_1791661085694.jpg',
+      image: '/assets/images/cosmic_stellar_nebula_1791661085694.jpg',
       metrics: '1,344 Ly • 10M Kelvin Core • Circumstellar Disks',
       onAction: () => onNavigateToChapter('episode-02'),
       actionText: 'Read Episode 02: Stellar Nurseries',
@@ -310,7 +310,7 @@ export const CosmosExploreGrid: React.FC<CosmosExploreGridProps> = ({
       title: "Earth's Closest Neighbor",
       subtitle: 'Tidal Rhythm & Ancient Regolith',
       shortDesc: "Our celestial companion preserving Earth's axial tilt and generating life-giving ocean tides. An impact-sculpted archive preserving four billion years of solar system history.",
-      image: '/src/assets/images/celestial_moon_surface_1791661072908.jpg',
+      image: '/assets/images/celestial_moon_surface_1791661072908.jpg',
       metrics: '384,400 km • 1.62 m/s² Gravity • 27.3 Day Orbit',
       onAction: () => onNavigateToPlanet('moon'),
       actionText: 'Launch 3D Moon Model',
@@ -328,7 +328,7 @@ export const CosmosExploreGrid: React.FC<CosmosExploreGridProps> = ({
       {/* Space Galactic Supernova Image Background behind Glass Elements */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
         <img
-          src="/src/assets/images/supernova_cosmic_explosion_1791711683777.jpg"
+          src="/assets/images/supernova_cosmic_explosion_1791711683777.jpg"
           alt="Supernova Cosmic Explosion Background"
           className="w-full h-full object-cover object-center opacity-40 filter brightness-[0.75] contrast-[1.15]"
           loading="lazy"

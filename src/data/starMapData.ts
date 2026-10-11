@@ -640,7 +640,7 @@ export const deepSkyObjectsData: DeepSkyObject[] = [
     constellation: 'Andromeda',
     coordinates: { raHours: 0.71, decDegrees: 41.27 },
     description: 'The nearest major spiral galaxy to the Milky Way, containing approximately one trillion stars. Andromeda is approaching our galaxy at 110 kilometers per second and will merge with us in ~4.5 billion years to form "Milkdromeda".',
-    imageUrl: '/src/assets/images/spiral_galaxy_core_1791661096182.jpg',
+    imageUrl: '/assets/images/spiral_galaxy_core_1791661096182.jpg',
   },
   {
     id: 'm42',
@@ -652,7 +652,7 @@ export const deepSkyObjectsData: DeepSkyObject[] = [
     constellation: 'Orion',
     coordinates: { raHours: 5.59, decDegrees: -5.39 },
     description: 'A stellar nursery where ultraviolet light from the Trapezium star cluster ionizes surrounding hydrogen gas into brilliant pink and violet luminescence. The closest region of massive star formation to Earth.',
-    imageUrl: '/src/assets/images/cosmic_stellar_nebula_1791661085694.jpg',
+    imageUrl: '/assets/images/cosmic_stellar_nebula_1791661085694.jpg',
   },
   {
     id: 'm45',
@@ -663,7 +663,7 @@ export const deepSkyObjectsData: DeepSkyObject[] = [
     constellation: 'Taurus',
     coordinates: { raHours: 3.79, decDegrees: 24.1 },
     description: 'A young open cluster of over 1,000 hot B-type stars formed within the last 100 million years, enveloped in an ethereal blue reflection nebula of passing interstellar dust particles.',
-    imageUrl: '/src/assets/images/cosmic_stellar_nebula_1791661085694.jpg',
+    imageUrl: '/assets/images/cosmic_stellar_nebula_1791661085694.jpg',
   },
   {
     id: 'sagittarius_a_star',
@@ -673,7 +673,7 @@ export const deepSkyObjectsData: DeepSkyObject[] = [
     constellation: 'Sagittarius',
     coordinates: { raHours: 17.76, decDegrees: -29.0 },
     description: 'The supermassive black hole anchoring the center of our Milky Way Galaxy, with a mass equal to 4.15 million Suns. Imaged by the Event Horizon Telescope in 2022.',
-    imageUrl: '/src/assets/images/supermassive_black_hole_1791661107412.jpg',
+    imageUrl: '/assets/images/supermassive_black_hole_1791661107412.jpg',
   },
   {
     id: 'm1',
@@ -685,7 +685,7 @@ export const deepSkyObjectsData: DeepSkyObject[] = [
     constellation: 'Taurus',
     coordinates: { raHours: 5.58, decDegrees: 22.01 },
     description: 'Iconic supernova remnant created by the explosion of a massive star witnessed from Earth on July 4, 1054. Houses a rapidly pulsating neutron star spinning at 30.2 times per second with concentric synchrotron emission rings.',
-    imageUrl: '/src/assets/images/supernova_remnant_veil_1791711709434.jpg',
+    imageUrl: '/assets/images/supernova_remnant_veil_1791711709434.jpg',
   },
   {
     id: 'sn_1987a',
@@ -695,7 +695,7 @@ export const deepSkyObjectsData: DeepSkyObject[] = [
     constellation: 'Dorado (LMC)',
     coordinates: { raHours: 5.59, decDegrees: -69.3 },
     description: 'The closest observed supernova in modern history, detonating in the Large Magellanic Cloud. Emitted a 13-second flood of neutrinos preceding optical light, forging heavy elements in relativistic blastwaves.',
-    imageUrl: '/src/assets/images/supernova_cosmic_explosion_1791711683777.jpg',
+    imageUrl: '/assets/images/supernova_cosmic_explosion_1791711683777.jpg',
   },
   {
     id: 'abell_2744',
@@ -705,7 +705,7 @@ export const deepSkyObjectsData: DeepSkyObject[] = [
     constellation: 'Sculptor',
     coordinates: { raHours: 0.24, decDegrees: -30.4 },
     description: 'A colossal cosmic megastructure resulting from the simultaneous pile-up of at least four separate galaxy clusters over 350 million years. Its extreme mass creates dramatic Einstein rings and gravitational lensing arcs.',
-    imageUrl: '/src/assets/images/galaxy_cluster_deepfield_1791711670367.jpg',
+    imageUrl: '/assets/images/galaxy_cluster_deepfield_1791711670367.jpg',
   },
   {
     id: 'bullet_cluster',
@@ -715,7 +715,7 @@ export const deepSkyObjectsData: DeepSkyObject[] = [
     constellation: 'Carina',
     coordinates: { raHours: 6.97, decDegrees: -55.94 },
     description: 'Two massive galaxy clusters colliding at 4,500 km/s. The collision produced a supersonic Mach-3 bow shock in normal X-ray gas, while dark matter passed through collisionless, providing direct observational proof of dark matter.',
-    imageUrl: '/src/assets/images/galaxy_cluster_collision_1791711722403.jpg',
+    imageUrl: '/assets/images/galaxy_cluster_collision_1791711722403.jpg',
   },
   {
     id: 'veil_nebula',
@@ -726,7 +726,7 @@ export const deepSkyObjectsData: DeepSkyObject[] = [
     constellation: 'Cygnus',
     coordinates: { raHours: 20.76, decDegrees: 30.71 },
     description: 'A delicate expanding shell of ionized gas resulting from a supernova that detonated 10,000 to 20,000 years ago. Its gossamer filaments of glowing oxygen and sulfur span over 130 light-years of space.',
-    imageUrl: '/src/assets/images/supernova_remnant_veil_1791711709434.jpg',
+    imageUrl: '/assets/images/supernova_remnant_veil_1791711709434.jpg',
   },
 ];
 

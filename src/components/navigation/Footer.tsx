@@ -11,7 +11,7 @@ export const Footer: React.FC<FooterProps> = ({ setActiveView }) => {
       {/* Starry Galactic View Image Background */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
         <img
-          src="/src/assets/images/galaxy_cluster_deepfield_1791711670367.jpg"
+          src="/assets/images/galaxy_cluster_deepfield_1791711670367.jpg"
           alt="Starry Galactic Deep Field"
           className="w-full h-96 object-center opacity-40 filter brightness-95 contrast-125"
           loading="lazy"

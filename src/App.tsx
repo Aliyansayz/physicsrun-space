@@ -98,7 +98,7 @@ export default function App() {
       {/* Global Space Galactic Supernova Background Layer (visible through translucent glass cards) */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         <img
-          src="/src/assets/images/supernova_cosmic_explosion_1791711683777.jpg"
+          src="/assets/images/supernova_cosmic_explosion_1791711683777.jpg"
           alt="Galactic Supernova Explosion"
           className="w-full h-full object-cover object-center opacity-30 filter brightness-[0.72] contrast-[1.2]"
           loading="eager"

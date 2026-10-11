@@ -111,47 +111,47 @@ export const EbookExploreView: React.FC<EbookExploreViewProps> = ({
 
   // Additional categories data for full depth
   const starsCards: CelestialCardItem[] = [
-    { id: 'sol', name: 'Sol (The Sun)', category: 'Stars', description: 'G-type main-sequence star sustaining Earth’s biosphere.', image: '/src/assets/images/celestial_moon_surface_1791661072908.jpg', actionType: 'planet', targetId: 'earth' },
-    { id: 'sirius', name: 'Sirius A', category: 'Stars', description: 'The brightest star in the night sky, located in Canis Major.', image: '/src/assets/images/spiral_galaxy_core_1791661096182.jpg', actionType: 'starmap', targetId: 'canis-major' },
-    { id: 'betelgeuse', name: 'Betelgeuse', category: 'Stars', description: 'Red supergiant nearing supernova detonation in Orion.', image: '/src/assets/images/supernova_cosmic_explosion_1791711683777.jpg', actionType: 'starmap', targetId: 'orion' },
-    { id: 'rigel', name: 'Rigel', category: 'Stars', description: 'Luminous blue supergiant 40,000 times brighter than the Sun.', image: '/src/assets/images/cosmic_stellar_nebula_1791661085694.jpg', actionType: 'starmap', targetId: 'orion' },
-    { id: 'proxima', name: 'Proxima Centauri', category: 'Stars', description: 'Our closest stellar neighbor at 4.246 light-years away.', image: '/src/assets/images/galaxy_cluster_deepfield_1791711670367.jpg', actionType: 'chapter', targetId: 'episode-01' },
-    { id: 'vega', name: 'Vega', category: 'Stars', description: 'Former North Star and photometric calibration standard.', image: '/src/assets/images/spiral_galaxy_core_1791661096182.jpg', actionType: 'starmap', targetId: 'lyra' },
-    { id: 'polaris', name: 'Polaris', category: 'Stars', description: 'Current northern pole star anchor of celestial navigation.', image: '/src/assets/images/galaxy_cluster_deepfield_1791711670367.jpg', actionType: 'starmap', targetId: 'ursa-minor' },
-    { id: 'canis-majoris', name: 'VY Canis Majoris', category: 'Stars', description: 'Extreme hypergiant spanning over 1.4 billion kilometers.', image: '/src/assets/images/supernova_remnant_veil_1791711709434.jpg', actionType: 'chapter', targetId: 'episode-02' },
+    { id: 'sol', name: 'Sol (The Sun)', category: 'Stars', description: 'G-type main-sequence star sustaining Earth’s biosphere.', image: '/assets/images/celestial_moon_surface_1791661072908.jpg', actionType: 'planet', targetId: 'earth' },
+    { id: 'sirius', name: 'Sirius A', category: 'Stars', description: 'The brightest star in the night sky, located in Canis Major.', image: '/assets/images/spiral_galaxy_core_1791661096182.jpg', actionType: 'starmap', targetId: 'canis-major' },
+    { id: 'betelgeuse', name: 'Betelgeuse', category: 'Stars', description: 'Red supergiant nearing supernova detonation in Orion.', image: '/assets/images/supernova_cosmic_explosion_1791711683777.jpg', actionType: 'starmap', targetId: 'orion' },
+    { id: 'rigel', name: 'Rigel', category: 'Stars', description: 'Luminous blue supergiant 40,000 times brighter than the Sun.', image: '/assets/images/cosmic_stellar_nebula_1791661085694.jpg', actionType: 'starmap', targetId: 'orion' },
+    { id: 'proxima', name: 'Proxima Centauri', category: 'Stars', description: 'Our closest stellar neighbor at 4.246 light-years away.', image: '/assets/images/galaxy_cluster_deepfield_1791711670367.jpg', actionType: 'chapter', targetId: 'episode-01' },
+    { id: 'vega', name: 'Vega', category: 'Stars', description: 'Former North Star and photometric calibration standard.', image: '/assets/images/spiral_galaxy_core_1791661096182.jpg', actionType: 'starmap', targetId: 'lyra' },
+    { id: 'polaris', name: 'Polaris', category: 'Stars', description: 'Current northern pole star anchor of celestial navigation.', image: '/assets/images/galaxy_cluster_deepfield_1791711670367.jpg', actionType: 'starmap', targetId: 'ursa-minor' },
+    { id: 'canis-majoris', name: 'VY Canis Majoris', category: 'Stars', description: 'Extreme hypergiant spanning over 1.4 billion kilometers.', image: '/assets/images/supernova_remnant_veil_1791711709434.jpg', actionType: 'chapter', targetId: 'episode-02' },
   ];
 
   const galaxiesCards: CelestialCardItem[] = [
-    { id: 'andromeda', name: 'Andromeda Galaxy (M31)', category: 'Galaxies', description: 'Nearest major spiral galaxy to the Milky Way.', image: '/src/assets/images/spiral_galaxy_core_1791661096182.jpg', actionType: 'chapter', targetId: 'episode-03' },
-    { id: 'milkyway', name: 'Milky Way Core', category: 'Galaxies', description: 'Barred spiral galaxy spanning 100,000 light-years.', image: '/src/assets/images/supermassive_black_hole_1791661107412.jpg', actionType: 'chapter', targetId: 'episode-03' },
-    { id: 'triangulum', name: 'Triangulum Galaxy (M33)', category: 'Galaxies', description: 'Third-largest member of our Local Group cluster.', image: '/src/assets/images/galaxy_cluster_deepfield_1791711670367.jpg', actionType: 'astrolens', targetId: 'ep-deepfield-smacs' },
-    { id: 'sombrero', name: 'Sombrero Galaxy (M104)', category: 'Galaxies', description: 'Brilliant white bulbous core with dark dust lane.', image: '/src/assets/images/spiral_galaxy_core_1791661096182.jpg', actionType: 'astrolens', targetId: 'ep-stephans-quintet' },
-    { id: 'whirlpool', name: 'Whirlpool Galaxy (M51)', category: 'Galaxies', description: 'Grand-design spiral interacting with NGC 5195.', image: '/src/assets/images/galaxy_cluster_collision_1791711722403.jpg', actionType: 'chapter', targetId: 'episode-03' },
-    { id: 'cartwheel', name: 'Cartwheel Galaxy', category: 'Galaxies', description: 'Rare ring galaxy formed by cosmic bullseye collision.', image: '/src/assets/images/galaxy_cluster_collision_1791711722403.jpg', actionType: 'astrolens', targetId: 'ep-stephans-quintet' },
-    { id: 'magellanic', name: 'Large Magellanic Cloud', category: 'Galaxies', description: 'Satellite galaxy harboring the Tarantula Nebula.', image: '/src/assets/images/cosmic_stellar_nebula_1791661085694.jpg', actionType: 'chapter', targetId: 'episode-03' },
-    { id: 'cigar', name: 'Cigar Galaxy (M82)', category: 'Galaxies', description: 'Starburst galaxy with intense hydrogen outflow jets.', image: '/src/assets/images/supernova_remnant_veil_1791711709434.jpg', actionType: 'chapter', targetId: 'episode-03' },
+    { id: 'andromeda', name: 'Andromeda Galaxy (M31)', category: 'Galaxies', description: 'Nearest major spiral galaxy to the Milky Way.', image: '/assets/images/spiral_galaxy_core_1791661096182.jpg', actionType: 'chapter', targetId: 'episode-03' },
+    { id: 'milkyway', name: 'Milky Way Core', category: 'Galaxies', description: 'Barred spiral galaxy spanning 100,000 light-years.', image: '/assets/images/supermassive_black_hole_1791661107412.jpg', actionType: 'chapter', targetId: 'episode-03' },
+    { id: 'triangulum', name: 'Triangulum Galaxy (M33)', category: 'Galaxies', description: 'Third-largest member of our Local Group cluster.', image: '/assets/images/galaxy_cluster_deepfield_1791711670367.jpg', actionType: 'astrolens', targetId: 'ep-deepfield-smacs' },
+    { id: 'sombrero', name: 'Sombrero Galaxy (M104)', category: 'Galaxies', description: 'Brilliant white bulbous core with dark dust lane.', image: '/assets/images/spiral_galaxy_core_1791661096182.jpg', actionType: 'astrolens', targetId: 'ep-stephans-quintet' },
+    { id: 'whirlpool', name: 'Whirlpool Galaxy (M51)', category: 'Galaxies', description: 'Grand-design spiral interacting with NGC 5195.', image: '/assets/images/galaxy_cluster_collision_1791711722403.jpg', actionType: 'chapter', targetId: 'episode-03' },
+    { id: 'cartwheel', name: 'Cartwheel Galaxy', category: 'Galaxies', description: 'Rare ring galaxy formed by cosmic bullseye collision.', image: '/assets/images/galaxy_cluster_collision_1791711722403.jpg', actionType: 'astrolens', targetId: 'ep-stephans-quintet' },
+    { id: 'magellanic', name: 'Large Magellanic Cloud', category: 'Galaxies', description: 'Satellite galaxy harboring the Tarantula Nebula.', image: '/assets/images/cosmic_stellar_nebula_1791661085694.jpg', actionType: 'chapter', targetId: 'episode-03' },
+    { id: 'cigar', name: 'Cigar Galaxy (M82)', category: 'Galaxies', description: 'Starburst galaxy with intense hydrogen outflow jets.', image: '/assets/images/supernova_remnant_veil_1791711709434.jpg', actionType: 'chapter', targetId: 'episode-03' },
   ];
 
   const nebulaeCards: CelestialCardItem[] = [
-    { id: 'orion-nebula', name: 'Orion Nebula (M42)', category: 'Nebulae', description: 'Vast stellar nursery visible to the naked eye.', image: '/src/assets/images/cosmic_stellar_nebula_1791661085694.jpg', actionType: 'chapter', targetId: 'episode-02' },
-    { id: 'carina', name: 'Carina Nebula', category: 'Nebulae', description: 'Home to the volatile hypergiant Eta Carinae.', image: '/src/assets/images/supernova_cosmic_explosion_1791711683777.jpg', actionType: 'astrolens', targetId: 'ep-carina-nebula' },
-    { id: 'pillars', name: 'Eagle Nebula (Pillars)', category: 'Nebulae', description: 'Famous elephant trunks of interstellar interstellar dust.', image: '/src/assets/images/cosmic_stellar_nebula_1791661085694.jpg', actionType: 'chapter', targetId: 'episode-02' },
-    { id: 'ring-nebula', name: 'Ring Nebula (M57)', category: 'Nebulae', description: 'Planetary nebula shell ejected by dying Sun-like star.', image: '/src/assets/images/supernova_remnant_veil_1791711709434.jpg', actionType: 'astrolens', targetId: 'ep-southern-ring' },
-    { id: 'crab-nebula', name: 'Crab Nebula (M1)', category: 'Nebulae', description: 'Supernova remnant from the historical 1054 CE blast.', image: '/src/assets/images/supernova_remnant_veil_1791711709434.jpg', actionType: 'chapter', targetId: 'episode-02' },
-    { id: 'helix', name: 'Helix Nebula (NGC 7293)', category: 'Nebulae', description: 'Often called the Eye of God due to its concentric rings.', image: '/src/assets/images/spiral_galaxy_core_1791661096182.jpg', actionType: 'chapter', targetId: 'episode-02' },
-    { id: 'veil-nebula', name: 'Veil Nebula', category: 'Nebulae', description: 'Delicate glowing filaments of a Cygnus Loop supernova.', image: '/src/assets/images/supernova_remnant_veil_1791711709434.jpg', actionType: 'chapter', targetId: 'episode-02' },
-    { id: 'butterfly', name: 'Butterfly Nebula (NGC 6302)', category: 'Nebulae', description: 'Bipolar planetary nebula with 250,000°C central star.', image: '/src/assets/images/supernova_cosmic_explosion_1791711683777.jpg', actionType: 'chapter', targetId: 'episode-02' },
+    { id: 'orion-nebula', name: 'Orion Nebula (M42)', category: 'Nebulae', description: 'Vast stellar nursery visible to the naked eye.', image: '/assets/images/cosmic_stellar_nebula_1791661085694.jpg', actionType: 'chapter', targetId: 'episode-02' },
+    { id: 'carina', name: 'Carina Nebula', category: 'Nebulae', description: 'Home to the volatile hypergiant Eta Carinae.', image: '/assets/images/supernova_cosmic_explosion_1791711683777.jpg', actionType: 'astrolens', targetId: 'ep-carina-nebula' },
+    { id: 'pillars', name: 'Eagle Nebula (Pillars)', category: 'Nebulae', description: 'Famous elephant trunks of interstellar interstellar dust.', image: '/assets/images/cosmic_stellar_nebula_1791661085694.jpg', actionType: 'chapter', targetId: 'episode-02' },
+    { id: 'ring-nebula', name: 'Ring Nebula (M57)', category: 'Nebulae', description: 'Planetary nebula shell ejected by dying Sun-like star.', image: '/assets/images/supernova_remnant_veil_1791711709434.jpg', actionType: 'astrolens', targetId: 'ep-southern-ring' },
+    { id: 'crab-nebula', name: 'Crab Nebula (M1)', category: 'Nebulae', description: 'Supernova remnant from the historical 1054 CE blast.', image: '/assets/images/supernova_remnant_veil_1791711709434.jpg', actionType: 'chapter', targetId: 'episode-02' },
+    { id: 'helix', name: 'Helix Nebula (NGC 7293)', category: 'Nebulae', description: 'Often called the Eye of God due to its concentric rings.', image: '/assets/images/spiral_galaxy_core_1791661096182.jpg', actionType: 'chapter', targetId: 'episode-02' },
+    { id: 'veil-nebula', name: 'Veil Nebula', category: 'Nebulae', description: 'Delicate glowing filaments of a Cygnus Loop supernova.', image: '/assets/images/supernova_remnant_veil_1791711709434.jpg', actionType: 'chapter', targetId: 'episode-02' },
+    { id: 'butterfly', name: 'Butterfly Nebula (NGC 6302)', category: 'Nebulae', description: 'Bipolar planetary nebula with 250,000°C central star.', image: '/assets/images/supernova_cosmic_explosion_1791711683777.jpg', actionType: 'chapter', targetId: 'episode-02' },
   ];
 
   const blackHolesCards: CelestialCardItem[] = [
-    { id: 'sag-a', name: 'Sagittarius A*', category: 'Black Holes', description: 'Supermassive black hole at the center of the Milky Way.', image: '/src/assets/images/supermassive_black_hole_1791661107412.jpg', actionType: 'chapter', targetId: 'episode-04' },
-    { id: 'm87', name: 'M87* Central Engine', category: 'Black Holes', description: 'First ever directly imaged black hole event horizon.', image: '/src/assets/images/supermassive_black_hole_1791661107412.jpg', actionType: 'chapter', targetId: 'episode-04' },
-    { id: 'cygnus-x1', name: 'Cygnus X-1', category: 'Black Holes', description: 'First confirmed stellar-mass black hole candidate.', image: '/src/assets/images/supernova_cosmic_explosion_1791711683777.jpg', actionType: 'starmap', targetId: 'cygnus' },
-    { id: 'ton-618', name: 'TON 618 Hypermassive Hole', category: 'Black Holes', description: 'Weighs 66 billion solar masses with a brilliant quasar.', image: '/src/assets/images/galaxy_cluster_deepfield_1791711670367.jpg', actionType: 'chapter', targetId: 'episode-04' },
-    { id: 'gw150914', name: 'GW150914 Merger', category: 'Black Holes', description: 'Historic binary black hole gravitational wave source.', image: '/src/assets/images/galaxy_cluster_collision_1791711722403.jpg', actionType: 'chapter', targetId: 'episode-04' },
-    { id: 'v404-cygni', name: 'V404 Cygni', category: 'Black Holes', description: 'Microquasar with relativistic relativistic jets.', image: '/src/assets/images/supermassive_black_hole_1791661107412.jpg', actionType: 'chapter', targetId: 'episode-04' },
-    { id: 'smbh-cluster', name: 'SMACS Lensing Black Holes', category: 'Black Holes', description: 'High-redshift early black holes revealed by JWST.', image: '/src/assets/images/galaxy_cluster_deepfield_1791711670367.jpg', actionType: 'astrolens', targetId: 'ep-deepfield-smacs' },
-    { id: 'stephans-core', name: 'NGC 7319 Active Core', category: 'Black Holes', description: 'Accreting central black hole in compact group.', image: '/src/assets/images/galaxy_cluster_collision_1791711722403.jpg', actionType: 'astrolens', targetId: 'ep-stephans-quintet' },
+    { id: 'sag-a', name: 'Sagittarius A*', category: 'Black Holes', description: 'Supermassive black hole at the center of the Milky Way.', image: '/assets/images/supermassive_black_hole_1791661107412.jpg', actionType: 'chapter', targetId: 'episode-04' },
+    { id: 'm87', name: 'M87* Central Engine', category: 'Black Holes', description: 'First ever directly imaged black hole event horizon.', image: '/assets/images/supermassive_black_hole_1791661107412.jpg', actionType: 'chapter', targetId: 'episode-04' },
+    { id: 'cygnus-x1', name: 'Cygnus X-1', category: 'Black Holes', description: 'First confirmed stellar-mass black hole candidate.', image: '/assets/images/supernova_cosmic_explosion_1791711683777.jpg', actionType: 'starmap', targetId: 'cygnus' },
+    { id: 'ton-618', name: 'TON 618 Hypermassive Hole', category: 'Black Holes', description: 'Weighs 66 billion solar masses with a brilliant quasar.', image: '/assets/images/galaxy_cluster_deepfield_1791711670367.jpg', actionType: 'chapter', targetId: 'episode-04' },
+    { id: 'gw150914', name: 'GW150914 Merger', category: 'Black Holes', description: 'Historic binary black hole gravitational wave source.', image: '/assets/images/galaxy_cluster_collision_1791711722403.jpg', actionType: 'chapter', targetId: 'episode-04' },
+    { id: 'v404-cygni', name: 'V404 Cygni', category: 'Black Holes', description: 'Microquasar with relativistic relativistic jets.', image: '/assets/images/supermassive_black_hole_1791661107412.jpg', actionType: 'chapter', targetId: 'episode-04' },
+    { id: 'smbh-cluster', name: 'SMACS Lensing Black Holes', category: 'Black Holes', description: 'High-redshift early black holes revealed by JWST.', image: '/assets/images/galaxy_cluster_deepfield_1791711670367.jpg', actionType: 'astrolens', targetId: 'ep-deepfield-smacs' },
+    { id: 'stephans-core', name: 'NGC 7319 Active Core', category: 'Black Holes', description: 'Accreting central black hole in compact group.', image: '/assets/images/galaxy_cluster_collision_1791711722403.jpg', actionType: 'astrolens', targetId: 'ep-stephans-quintet' },
   ];
 
   const categoryMap: Record<CategoryType, { title: string; subtitle: string; cards: CelestialCardItem[] }> = {
@@ -231,7 +231,7 @@ export const EbookExploreView: React.FC<EbookExploreViewProps> = ({
       {/* Space Galactic Supernova Visual Layer behind Ebook Glass Cards */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
         <img
-          src="/src/assets/images/supernova_remnant_veil_1791711709434.jpg"
+          src="/assets/images/supernova_remnant_veil_1791711709434.jpg"
           alt="Supernova Remnant Nebula Background"
           className="w-full h-full object-cover object-center opacity-35 filter brightness-[0.75] contrast-[1.2]"
           loading="lazy"
@@ -466,7 +466,7 @@ export const EbookExploreView: React.FC<EbookExploreViewProps> = ({
             {/* Background Andromeda Galaxy Image with Atmospheric Scrim */}
             <div className="absolute inset-0 z-0">
               <img
-                src="/src/assets/images/spiral_galaxy_core_1791661096182.jpg"
+                src="/assets/images/spiral_galaxy_core_1791661096182.jpg"
                 alt="Andromeda Galaxy"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out filter brightness-75 contrast-125"
                 referrerPolicy="no-referrer"
