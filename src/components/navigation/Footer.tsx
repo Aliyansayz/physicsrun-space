@@ -7,13 +7,13 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ setActiveView }) => {
   return (
-    <footer className="relative overflow-hidden py-14 px-6 text-center border-t border-white/10">
+    <footer className="relative overflow-hidden py-6 px-6 text-center border-y border-white/10">
       {/* Starry Galactic View Image Background */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
         <img
           src="/src/assets/images/galaxy_cluster_deepfield_1791711670367.jpg"
           alt="Starry Galactic Deep Field"
-          className="w-full h-full object-cover object-center opacity-45 filter brightness-95 contrast-125 scale-105"
+          className="w-full h-96 object-center opacity-40 filter brightness-95 contrast-125"
           loading="lazy"
         />
         {/* Deep starry space gradient scrims */}
