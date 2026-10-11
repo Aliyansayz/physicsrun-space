@@ -1,0 +1,113 @@
+export type SpectralClass = 'O' | 'B' | 'A' | 'F' | 'G' | 'K' | 'M';
+
+export interface PlanetData {
+  id: string;
+  name: string;
+  classification: string;
+  tagline: string;
+  diameterKm: number;
+  massKg: string;
+  surfaceGravity: string;
+  orbitalPeriodDays: number;
+  distanceFromSunAU: number;
+  meanTemperatureC: number;
+  atmosphereComposition: string[];
+  moonsCount: number;
+  dayLengthHours: number;
+  axialTiltDegrees: number;
+  description: string;
+  funFact: string;
+  colorHex: string;
+  atmosphereGlowHex: string;
+  hasRings?: boolean;
+  ringInnerRadius?: number;
+  ringOuterRadius?: number;
+  ringColorHex?: string;
+  layers: {
+    name: string;
+    thickness: string;
+    composition: string;
+    temperature: string;
+    colorHex: string;
+  }[];
+}
+
+export interface StarData {
+  id: string;
+  name: string;
+  bayerDesignation?: string;
+  constellationId: string;
+  spectralClass: SpectralClass;
+  apparentMagnitude: number;
+  distanceLightYears: number;
+  temperatureKelvin: number;
+  massSolarMasses: number;
+  coordinates: {
+    raHours: number;
+    decDegrees: number;
+  };
+  description: string;
+}
+
+export interface ConstellationData {
+  id: string;
+  name: string;
+  latinName: string;
+  englishMeaning: string;
+  hemisphere: 'Northern' | 'Southern' | 'Equatorial';
+  season: 'Winter' | 'Spring' | 'Summer' | 'Autumn';
+  mainStars: string[];
+  connections: [number, number][]; // indices into mainStars
+  lore: string;
+  astrophysicsNote: string;
+  audioNarrationScript: string;
+}
+
+export interface DeepSkyObject {
+  id: string;
+  messierCode?: string;
+  ngcCode?: string;
+  name: string;
+  type: 'Nebula' | 'Spiral Galaxy' | 'Elliptical Galaxy' | 'Open Cluster' | 'Globular Cluster' | 'Black Hole' | 'Supernova' | 'Supernova Remnant' | 'Galaxy Cluster';
+  distanceLightYears: number;
+  constellation: string;
+  coordinates: {
+    raHours: number;
+    decDegrees: number;
+  };
+  description: string;
+  imageUrl?: string;
+}
+
+export interface ChapterParagraph {
+  id: string;
+  text: string;
+  callout?: string;
+  annotationTerm?: string;
+  annotationExplanation?: string;
+}
+
+export interface ChapterData {
+  id: string;
+  episodeNumber: number;
+  title: string;
+  subtitle: string;
+  summary: string;
+  readTimeMinutes: number;
+  heroImage: string;
+  associatedPlanetId?: string;
+  associatedDsoId?: string;
+  paragraphs: ChapterParagraph[];
+  audioTranscript: string;
+  keyMetrics: {
+    label: string;
+    value: string;
+    unit?: string;
+  }[];
+  deepQuestions: {
+    question: string;
+    answer: string;
+  }[];
+}
+
+export type ActiveView = 'landing' | 'ebook' | 'planets' | 'starmap' | 'astrolens';

@@ -1,0 +1,137 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --font-serif: 'Cinzel', serif;
+    --font-handwriting: 'Caveat', 'Dancing Script', cursive;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: #05070e;
+    color: #e2e8f0;
+    overflow-x: hidden;
+  }
+}
+
+.font-handwriting {
+  font-family: 'Caveat', 'Dancing Script', cursive;
+}
+
+/* Custom dark scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #05070e;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+/* Starfield canvas animation helpers */
+@keyframes pulseSubtle {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 0.3; }
+}
+
+.animate-pulse-subtle {
+  animation: pulseSubtle 4s ease-in-out infinite;
+}
+
+/* Pandora Cluster Animated Cosmic Motion Keyframes */
+@keyframes cosmicDrift {
+  0% {
+    transform: scale(1.05) translate(0%, 0%) rotate(0deg);
+  }
+  33% {
+    transform: scale(1.11) translate(-1.2%, -0.8%) rotate(0.35deg);
+  }
+  66% {
+    transform: scale(1.08) translate(1.0%, -1.2%) rotate(-0.3deg);
+  }
+  100% {
+    transform: scale(1.05) translate(0%, 0%) rotate(0deg);
+  }
+}
+
+@keyframes clusterGlowPulse {
+  0%, 100% {
+    opacity: 0.45;
+    filter: drop-shadow(0 0 25px rgba(56, 189, 248, 0.3));
+  }
+  50% {
+    opacity: 0.8;
+    filter: drop-shadow(0 0 48px rgba(99, 102, 241, 0.5));
+  }
+}
+
+@keyframes stellarShimmer {
+  0%, 100% {
+    opacity: 0.25;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.65;
+    transform: scale(1.03);
+  }
+}
+
+.animate-cosmic-drift {
+  animation: cosmicDrift 28s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-cluster-pulse {
+  animation: clusterGlowPulse 8s ease-in-out infinite;
+  will-change: opacity, filter;
+}
+
+.animate-stellar-shimmer {
+  animation: stellarShimmer 10s ease-in-out infinite;
+  will-change: opacity, transform;
+}
+
+/* 3D Observatory Card Parallax Immersion Styles */
+.observatory-perspective {
+  perspective: 1200px;
+}
+
+.observatory-card-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s ease;
+  will-change: transform;
+}
+
+.observatory-card-3d:hover {
+  transform: translateY(-8px) rotateX(3.5deg) rotateY(-3.5deg) translateZ(12px);
+  box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.8), 0 0 40px 3px rgba(6, 182, 212, 0.25);
+}
+
+.observatory-card-3d:hover .parallax-layer-back {
+  transform: translateZ(6px);
+}
+
+.observatory-card-3d:hover .parallax-layer-image {
+  transform: translateZ(18px) scale(1.05);
+}
+
+.observatory-card-3d:hover .parallax-layer-badge {
+  transform: translateZ(36px);
+}
+
+.observatory-card-3d:hover .parallax-layer-overlay {
+  transform: translateZ(26px);
+  opacity: 1;
+}
+
+.observatory-card-3d:hover .parallax-layer-content {
+  transform: translateZ(16px);
+}
