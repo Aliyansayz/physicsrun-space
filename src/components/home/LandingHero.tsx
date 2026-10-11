@@ -13,38 +13,24 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
   return (
     <section className="relative min-h-[95vh] pt-36 pb-24 flex items-center overflow-hidden bg-[#060913]">
       
-      {/* Pandora's Cluster (Abell 2744) Cosmic Deep Field Background Visual - Vivid and Un-blued */}
+      {/* Pandora's Cluster (Abell 2744) Cosmic Deep Field Background Visual - High-Resolution & Razor Sharp */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden select-none">
         <img
-          src="/src/assets/images/galaxy_cluster_deepfield_1791711670367.jpg"
-          alt="Pandora Cluster (Abell 2744) Deep Field"
-          className="w-full h-full object-cover object-center scale-105 animate-cosmic-drift"
+          src="/src/assets/images/pandora_cluster_sharp_1791737058239.jpg"
+          alt="Pandora Cluster (Abell 2744) Deep Field - Crystal Sharp JWST View"
+          className="w-full h-full object-cover object-center"
+          loading="eager"
         />
-        {/* Soft atmospheric gradient masks for readability without bluing/dimming the background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#060913]/45 via-transparent to-[#060913]/70" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#060913]/75 via-[#060913]/20 to-transparent" />
+        {/* Soft atmospheric gradient masks for readability without dulling or blurring the background */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#060913]/30 via-transparent to-[#060913]/60 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#060913]/70 via-[#060913]/15 to-transparent pointer-events-none" />
       </div>
 
       {/* Main Content Area */}
       <div className="max-w-7xl mx-auto px-6 sm:px-8 w-full relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pointer-events-none">
         <div className="lg:col-span-8 xl:col-span-7 pointer-events-auto">
           
-          {/* Category Tag: LOOK UP • EXPLORE • DISCOVER */}
-          <div className="flex items-center space-x-2 text-xs font-light tracking-[0.22em] text-slate-300 uppercase mb-3 select-none">
-            <span>LOOK UP</span>
-            <span className="text-cyan-400 font-bold">•</span>
-            <span>EXPLORE</span>
-            <span className="text-cyan-400 font-bold">•</span>
-            <span>DISCOVER</span>
-          </div>
 
-          {/* Celestial Kicker */}
-          <div className="inline-flex items-center space-x-2 mb-3 select-none">
-            <span className="font-serif text-lg sm:text-xl text-cyan-300 tracking-[0.2em] uppercase drop-shadow-[0_0_12px_rgba(34,211,238,0.5)]">
-              ✦ An Explorer's Journey Into The Infinite ✦
-            </span>
-          </div>
-          
           {/* Heading: The Universe is Calling */}
           <h1 className="text-5xl sm:text-6xl md:text-7xl font-light tracking-tight text-white leading-[1.1] mb-7 select-none">
             The Universe <br />
