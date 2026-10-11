@@ -27,7 +27,6 @@ export const Header: React.FC<HeaderProps> = ({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Dynamic scroll listener for adaptive transparent-to-frosted glass transition
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);

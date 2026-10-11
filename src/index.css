@@ -8,6 +8,11 @@
     --font-handwriting: 'Caveat', 'Dancing Script', cursive;
   }
 
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
   body {
     font-family: var(--font-sans);
     background-color: #05070e;
@@ -16,11 +21,7 @@
   }
 }
 
-.font-handwriting {
-  font-family: 'Caveat', 'Dancing Script', cursive;
-}
-
-/* Custom dark scrollbar */
+/* Elegant cosmic custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -29,11 +30,14 @@
   background: #05070e;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: rgba(34, 211, 238, 0.25);
   border-radius: 9999px;
+  border: 1px solid rgba(34, 211, 238, 0.15);
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: rgba(34, 211, 238, 0.5);
+  box-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
 }
 
 /* Starfield canvas animation helpers */
