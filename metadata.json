@@ -1,6 +1,0 @@
-{
-  "name": "PhysicsRun - Cinematic Space Exploration Ebook & 3D Celestial Atlas",
-  "description": "A cinematic space exploration ebook viewer featuring interactive 3D planet models, an immersive narrated celestial star map, and ambient cosmic audio.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}
