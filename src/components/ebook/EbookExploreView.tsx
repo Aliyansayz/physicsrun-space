@@ -5,6 +5,7 @@ import { PlanetDiscCanvas } from './PlanetDiscCanvas';
 import { EbookChapterTopicsHeader } from './EbookChapterTopicsHeader';
 import { CosmicShockers } from './CosmicShockers';
 import { cosmicImages } from '../../assets/images';
+import { ResponsiveImage } from '../common/ResponsiveImage';
 
 interface EbookExploreViewProps {
   onOpenReader?: (chapterId?: string) => void;
@@ -124,7 +125,7 @@ export const EbookExploreView: React.FC<EbookExploreViewProps> = ({
   ];
 
   const galaxiesCards: CelestialCardItem[] = [
-    { id: 'andromeda', name: 'Andromeda Galaxy (M31)', category: 'Galaxies', description: 'Nearest major spiral galaxy to the Milky Way.', image: cosmicImages.spiralGalaxyCore.url, actionType: 'chapter', targetId: 'episode-03' },
+    { id: 'andromeda', name: 'Andromeda Galaxy (M31)', category: 'Galaxies', description: 'Nearest major spiral galaxy to the Milky Way.', image: cosmicImages.andromedaGalaxyM31.url, actionType: 'chapter', targetId: 'episode-03' },
     { id: 'milkyway', name: 'Milky Way Core', category: 'Galaxies', description: 'Barred spiral galaxy spanning 100,000 light-years.', image: cosmicImages.supermassiveBlackHole.url, actionType: 'chapter', targetId: 'episode-03' },
     { id: 'triangulum', name: 'Triangulum Galaxy (M33)', category: 'Galaxies', description: 'Third-largest member of our Local Group cluster.', image: cosmicImages.galaxyClusterDeepfield.url, actionType: 'astrolens', targetId: 'ep-deepfield-smacs' },
     { id: 'sombrero', name: 'Sombrero Galaxy (M104)', category: 'Galaxies', description: 'Brilliant white bulbous core with dark dust lane.', image: cosmicImages.spiralGalaxyCore.url, actionType: 'astrolens', targetId: 'ep-stephans-quintet' },
@@ -458,15 +459,15 @@ export const EbookExploreView: React.FC<EbookExploreViewProps> = ({
           <div className="lg:col-span-8 relative overflow-hidden rounded-2xl border border-white/15 backdrop-blur-xl bg-slate-950/35 min-h-[380px] flex flex-col justify-between p-7 sm:p-9 group shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
             
             {/* Background Andromeda Galaxy Image with Atmospheric Scrim */}
-            <div className="absolute inset-0 z-0">
-              <img
-                src="/assets/images/spiral_galaxy_core_1791661096182.png"
-                alt="Andromeda Galaxy"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out filter brightness-75 contrast-125"
-                referrerPolicy="no-referrer"
+            <div className="absolute inset-0 z-0 overflow-hidden">
+              <ResponsiveImage
+                picture={cosmicImages.andromedaGalaxyM31.picture}
+                alt="Andromeda Galaxy (M31)"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out brightness-100 contrast-105"
+                sizes="(max-width: 1024px) 100vw, 66vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#060913]/90 via-[#060913]/60 to-black/40" />
-              <div className="absolute inset-0 bg-radial-at-c from-transparent via-[#060913]/40 to-[#060913]/90" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#060913]/90 via-[#060913]/35 to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#060913]/65 via-transparent to-transparent pointer-events-none" />
             </div>
 
             {/* Top Badge: FEATURED */}

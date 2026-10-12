@@ -1,4 +1,5 @@
-﻿import celestialMoon from './celestial_moon_surface_1791661072908.png?as=picture&w=640;1440&format=webp;jpg&quality=88&withoutEnlargement';
+import andromedaGalaxyM31 from './andromeda_galaxy_m31_1791847894303.png?as=picture&w=640;1440&format=webp;jpg&quality=88&withoutEnlargement';
+import celestialMoon from './celestial_moon_surface_1791661072908.png?as=picture&w=640;1440&format=webp;jpg&quality=88&withoutEnlargement';
 import cosmicStellarNebula from './cosmic_stellar_nebula_1791661085694.png?as=picture&w=640;1440&format=webp;jpg&quality=88&withoutEnlargement';
 import galaxyClusterCollision from './galaxy_cluster_collision_1791711722403.png?as=picture&w=640;1440&format=webp;jpg&quality=88&withoutEnlargement';
 import galaxyClusterDeepfield from './galaxy_cluster_deepfield_1791711670367.png?as=picture&w=640;1440&format=webp;jpg&quality=88&withoutEnlargement';
@@ -27,6 +28,10 @@ import supernovaRemnantVeil from './supernova_remnant_veil_1791711709434.png?as=
  * succeeds, and keep `src/vite-env.d.ts` in sync with the query string.
  */
 export const cosmicImages = {
+  andromedaGalaxyM31: {
+    picture: andromedaGalaxyM31,
+    url: andromedaGalaxyM31.img.src,
+  },
   celestialMoon: {
     picture: celestialMoon,
     url: celestialMoon.img.src,

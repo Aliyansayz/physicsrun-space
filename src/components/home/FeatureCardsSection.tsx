@@ -8,7 +8,7 @@ interface FeatureCardsSectionProps {
   onSelectDeepSpace: () => void;
 }
 
-export const FeatureCardsSection: React.FC<FeatureCardsSectionProps> = ({
+export const FeatureCardsSection: React.FC<FeatureCardsSectionProps> = React.memo(({
   onSelectPlanets,
   onSelectStarMap,
   onSelectGalaxies,
@@ -105,4 +105,6 @@ export const FeatureCardsSection: React.FC<FeatureCardsSectionProps> = ({
       </div>
     </section>
   );
-};
+});
+
+FeatureCardsSection.displayName = 'FeatureCardsSection';

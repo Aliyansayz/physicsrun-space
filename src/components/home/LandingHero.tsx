@@ -6,7 +6,7 @@ interface LandingHeroProps {
   onStartExploring: () => void;
 }
 
-export const LandingHero: React.FC<LandingHeroProps> = ({
+export const LandingHero: React.FC<LandingHeroProps> = React.memo(({
   onStartExploring,
 }) => {
   return (
@@ -27,9 +27,9 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
             </span>
           </h1>
 
-          {/* Subtitle Description */}
+          {/* Subtitle Description with keyword highlighting */}
           <p className="text-slate-300 text-base sm:text-lg max-w-xl font-light leading-relaxed mb-9 select-none">
-            Explore galaxies, planets, stars and the mysteries beyond. A journey through space, time and the wonders of the cosmos.
+            Explore <span className="text-cyan-300 font-normal">galaxies</span>, <span className="text-sky-300 font-normal">planets</span>, <span className="text-teal-300 font-normal">stars</span> and the mysteries beyond. A journey through <span className="text-white font-normal border-b border-cyan-400/40 pb-0.5">space, time</span> and the <span className="text-cyan-200 font-normal">wonders of the cosmos</span>.
           </p>
 
           {/* Start Exploring Button */}
@@ -66,5 +66,7 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
       </button>
     </section>
   );
-};
+});
+
+LandingHero.displayName = 'LandingHero';
 

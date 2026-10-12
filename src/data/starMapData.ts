@@ -1,4 +1,4 @@
-﻿import { cosmicImages } from '../assets/images';
+import { cosmicImages } from '../assets/images';
 import { ConstellationData, DeepSkyObject, StarData } from '../types';
 
 export const constellationsData: ConstellationData[] = [
@@ -680,7 +680,7 @@ export const deepSkyObjectsData: DeepSkyObject[] = [
     constellation: 'Andromeda',
     coordinates: { raHours: 0.71, decDegrees: 41.27 },
     description: 'The nearest major spiral galaxy to the Milky Way, containing approximately one trillion stars. Andromeda is approaching our galaxy at 110 kilometers per second and will merge with us in ~4.5 billion years to form "Milkdromeda".',
-    imageUrl: cosmicImages.spiralGalaxyCore.url,
+    imageUrl: cosmicImages.andromedaGalaxyM31.url,
   },
   {
     id: 'm42',
