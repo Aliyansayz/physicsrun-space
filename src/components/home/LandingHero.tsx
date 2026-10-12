@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
-import { StarryNightSky } from './StarryNightSky';
+import { RotatingHeroImages } from './RotatingHeroImages';
 
 interface LandingHeroProps {
   onStartExploring: () => void;
@@ -12,8 +12,8 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
   return (
     <section className="relative min-h-[96vh] pt-36 pb-28 flex items-center overflow-hidden bg-[#060913]">
 
-      {/* Starry Night Sky Background */}
-      <StarryNightSky />
+      {/* Rotating Hero Images from Episodic Catalog */}
+      <RotatingHeroImages />
 
       {/* Main Content Area */}
       <div className="max-w-7xl mx-auto px-6 sm:px-8 w-full relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pointer-events-none">

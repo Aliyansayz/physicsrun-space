@@ -134,8 +134,6 @@ export default function App() {
             {/* Hero Section */}
             <LandingHero
               onStartExploring={() => handleSwitchView('ebook')}
-              onOpenPlanets={() => handleSwitchView('planets')}
-              onOpenStarMap={() => handleSwitchView('starmap')}
             />
 
             {/* 4 Feature Exploration Cards */}

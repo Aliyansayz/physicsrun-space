@@ -21,7 +21,7 @@ export const constellationsData: ConstellationData[] = [
     latinName: 'Ursa Minor',
     englishMeaning: 'The Little Bear',
     hemisphere: 'Northern',
-    season: 'All Year',
+    season: 'Spring',
     mainStars: ['Polaris'],
     connections: [],
     lore: 'Ursa Minor contains Polaris, the current North Star, which has guided travelers for centuries. Many cultures saw it as the celestial pivot around which the sky rotates.',

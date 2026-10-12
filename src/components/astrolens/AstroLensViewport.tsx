@@ -142,8 +142,6 @@ export const AstroLensViewport: React.FC<AstroLensViewportProps> = ({
   // Capture Telemetry-Stamped Snapshot
   const handleCaptureSnapshot = useCallback(() => {
     astroSonification.playShutterSound();
-    try {
-
     const canvas = document.createElement('canvas');
     canvas.width = 1400;
     canvas.height = 900;
@@ -206,30 +204,39 @@ export const AstroLensViewport: React.FC<AstroLensViewportProps> = ({
         canvas.height - 30
       );
 
-      const dataUrl = canvas.toDataURL('image/jpeg', 0.92);
+      try {
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.92);
 
-      // Save to local discovery storage
-      const snapshot = {
-        id: `snap_${Date.now()}`,
-        episodeId: episode.id,
-        episodeTitle: episode.title,
-        wavelength: activeWavelength,
-        timestamp: Date.now(),
-        imageUrl: dataUrl,
-        reticleCoords: { x: 50, y: 50 },
-        zoomLevel,
-        notes: `Captured in ${currentBand.label} via ${currentBand.telescope}`,
-      };
+        // Save to local discovery storage
+        const snapshot = {
+          id: `snap_${Date.now()}`,
+          episodeId: episode.id,
+          episodeTitle: episode.title,
+          wavelength: activeWavelength,
+          timestamp: Date.now(),
+          imageUrl: dataUrl,
+          reticleCoords: { x: 50, y: 50 },
+          zoomLevel,
+          notes: `Captured in ${currentBand.label} via ${currentBand.telescope}`,
+        };
 
-      addCapturedSnapshot(snapshot);
+        addCapturedSnapshot(snapshot);
 
-      setSnapshotToast('Snapshot logged into Observatory Logbook!');
-      setTimeout(() => setSnapshotToast(null), 3500);
-    } catch (err) {
-      console.error('Snapshot capture failed:', err);
-      setSnapshotToast('Snapshot unavailable — CORS policy prevented capture');
+        setSnapshotToast('Snapshot logged into Observatory Logbook!');
+        setTimeout(() => setSnapshotToast(null), 3500);
+      } catch (err) {
+        console.error('Snapshot capture failed:', err);
+        setSnapshotToast('Snapshot unavailable — CORS policy prevented capture');
+        setTimeout(() => setSnapshotToast(null), 3000);
+      }
+    };
+
+    // Handle image load errors (e.g., CORS)
+    img.onerror = () => {
+      console.error('Failed to load episode image for snapshot');
+      setSnapshotToast('Snapshot unavailable — failed to load image');
       setTimeout(() => setSnapshotToast(null), 3000);
-    }
+    };
   }, [episode, activeWavelength, zoomLevel]);
 
   const activeBand = SPECTRAL_BANDS[activeWavelength];

@@ -139,7 +139,7 @@ export const CinematicEbookViewer: React.FC<CinematicEbookViewerProps> = ({
           const p = currentChapter.paragraphs[foundIdx];
           const range = paragraphCharRanges[foundIdx];
           const localChar = charIdx - range.start;
-          const sentences = getParagraphSentences(p.text);
+          const sentences = getParagraphSentences(foundIdx);
           const sIdx = sentences.findIndex(s => localChar >= s.start && localChar <= s.end);
           setActiveSentenceIndex(sIdx !== -1 ? sIdx : 0);
         } else if (charIdx < (paragraphCharRanges[0]?.start || 0)) {
@@ -396,7 +396,7 @@ export const CinematicEbookViewer: React.FC<CinematicEbookViewerProps> = ({
                   </div>
 
                   <p className="text-slate-100 leading-relaxed font-light text-base sm:text-lg drop-shadow-sm">
-                    {getParagraphSentences(para.text).map((sentenceObj, sIdx) => {
+                    {getParagraphSentences(idx).map((sentenceObj, sIdx) => {
                       const isSentenceActive = isHighlighted && activeSentenceIndex === sIdx;
                       return (
                         <span
