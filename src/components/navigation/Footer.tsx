@@ -1,5 +1,7 @@
 import React from 'react';
 import { ActiveView } from '../../types';
+import { cosmicImages } from '../../assets/images';
+import { ResponsiveImage } from '../common/ResponsiveImage';
 
 interface FooterProps {
   setActiveView: (view: ActiveView) => void;
@@ -10,15 +12,14 @@ export const Footer: React.FC<FooterProps> = ({ setActiveView }) => {
     <footer className="relative overflow-hidden py-6 px-6 text-center border-y border-white/10">
       {/* Starry Galactic View Image Background */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-        <img
-          src="/assets/images/galaxy_cluster_deepfield_1791711670367.jpg"
+        <ResponsiveImage
+          picture={cosmicImages.galaxyClusterDeepfield.picture}
           alt="Starry Galactic Deep Field"
-          className="w-full h-96 object-center opacity-40 filter brightness-95 contrast-125"
-          loading="lazy"
+          className="w-full h-96 object-center opacity-40"
+          sizes="100vw"
         />
         {/* Deep starry space gradient scrims */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#05070e] via-[#05070e]/70 to-[#05070e]/85" />
-        <div className="absolute inset-0 bg-radial-at-c from-cyan-500/10 via-purple-500/5 to-transparent blur-xl pointer-events-none" />
       </div>
 
       {/* Content Layout without boxed container */}

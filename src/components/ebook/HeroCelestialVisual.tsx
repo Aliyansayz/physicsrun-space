@@ -1,54 +1,55 @@
 import React, { useState, useEffect } from 'react';
 import { Shuffle } from 'lucide-react';
+import { cosmicImages } from '../../assets/images';
 
 const EBOOK_PICTURES = [
   {
     id: 'moon-horizon',
     title: 'Earth & Moon Horizon',
     caption: 'Atmospheric limb with lunar companion',
-    src: '/assets/images/celestial_moon_surface_1791661072908.jpg',
+    src: cosmicImages.celestialMoon.url,
   },
   {
     id: 'spiral-galaxy',
     title: 'Spiral Galaxy Core',
     caption: 'Stellar nursery & galactic bar',
-    src: '/assets/images/spiral_galaxy_core_1791661096182.jpg',
+    src: cosmicImages.spiralGalaxyCore.url,
   },
   {
     id: 'supernova-veil',
     title: 'Supernova Veil Remnant',
     caption: 'Ionized blast wave expanding across 110 ly',
-    src: '/assets/images/supernova_remnant_veil_1791711709434.jpg',
+    src: cosmicImages.supernovaRemnantVeil.url,
   },
   {
     id: 'stellar-nebula',
     title: 'Cosmic Stellar Nebula',
     caption: 'Protostellar gas pillar & Herbig-Haro jet',
-    src: '/assets/images/cosmic_stellar_nebula_1791661085694.jpg',
+    src: cosmicImages.cosmicStellarNebula.url,
   },
   {
     id: 'deepfield-cluster',
     title: 'Galaxy Cluster Deepfield',
     caption: 'Gravitational lensing across 4.6 billion ly',
-    src: '/assets/images/galaxy_cluster_deepfield_1791711670367.jpg',
+    src: cosmicImages.galaxyClusterDeepfield.url,
   },
   {
     id: 'black-hole',
     title: 'Supermassive Black Hole',
     caption: 'Relativistic Doppler beaming & photon ring',
-    src: '/assets/images/supermassive_black_hole_1791661107412.jpg',
+    src: cosmicImages.supermassiveBlackHole.url,
   },
   {
     id: 'cosmic-explosion',
     title: 'Cosmic Supernova Explosion',
     caption: 'Thermal runaway & heavy element synthesis',
-    src: '/assets/images/supernova_cosmic_explosion_1791711683777.jpg',
+    src: cosmicImages.supernovaCosmicExplosion.url,
   },
   {
     id: 'cluster-collision',
     title: 'Galaxy Cluster Collision',
     caption: 'Dark matter dissociation shock front',
-    src: '/assets/images/galaxy_cluster_collision_1791711722403.jpg',
+    src: cosmicImages.galaxyClusterCollision.url,
   },
 ];
 

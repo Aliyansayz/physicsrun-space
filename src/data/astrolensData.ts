@@ -1,14 +1,15 @@
 import { AstroLensEpisode, SpectralBandInfo, SpectralWavelength } from '../types/astrolens';
+import { cosmicImages } from '../assets/images';
 
 // Local high-resolution cosmic imagery
-import galaxyClusterDeepfield from '/assets/images/galaxy_cluster_deepfield_1791711670367.jpg';
-import galaxyClusterCollision from '/assets/images/galaxy_cluster_collision_1791711722403.jpg';
-import supernovaCosmicExplosion from '/assets/images/supernova_cosmic_explosion_1791711683777.jpg';
-import supernovaRemnantVeil from '/assets/images/supernova_remnant_veil_1791711709434.jpg';
-import spiralGalaxyCore from '/assets/images/spiral_galaxy_core_1791661096182.jpg';
-import supermassiveBlackHole from '/assets/images/supermassive_black_hole_1791661107412.jpg';
-import cosmicStellarNebula from '/assets/images/cosmic_stellar_nebula_1791661085694.jpg';
-import celestialMoonSurface from '/assets/images/celestial_moon_surface_1791661072908.jpg';
+const galaxyClusterDeepfield = cosmicImages.galaxyClusterDeepfield.url;
+const galaxyClusterCollision = cosmicImages.galaxyClusterCollision.url;
+const supernovaCosmicExplosion = cosmicImages.supernovaCosmicExplosion.url;
+const supernovaRemnantVeil = cosmicImages.supernovaRemnantVeil.url;
+const spiralGalaxyCore = cosmicImages.spiralGalaxyCore.url;
+const supermassiveBlackHole = cosmicImages.supermassiveBlackHole.url;
+const cosmicStellarNebula = cosmicImages.cosmicStellarNebula.url;
+const celestialMoonSurface = cosmicImages.celestialMoon.url;
 
 export const SPECTRAL_BANDS: Record<SpectralWavelength, SpectralBandInfo> = {
   optical: {

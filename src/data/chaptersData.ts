@@ -1,4 +1,5 @@
-import { ChapterData } from '../types';
+﻿import { ChapterData } from '../types';
+import { cosmicImages } from '../assets/images';
 
 export const chaptersData: ChapterData[] = [
   {
@@ -8,7 +9,7 @@ export const chaptersData: ChapterData[] = [
     subtitle: 'Rocky Sanctuaries, Gas Leviathans & Gravitational Harmony',
     summary: 'Traverse the architecture of our home solar system, from the molten furnaces of inner terrestrial worlds to the frozen rings of gas giants and the vast heliospheric borderland.',
     readTimeMinutes: 6,
-    heroImage: '/assets/images/celestial_moon_surface_1791661072908.jpg',
+    heroImage: cosmicImages.celestialMoon.url,
     associatedPlanetId: 'earth',
     keyMetrics: [
       { label: 'System Age', value: '4.57', unit: 'Billion Years' },
@@ -64,7 +65,7 @@ export const chaptersData: ChapterData[] = [
     subtitle: 'The Ignition of Nuclear Fusion & The Cycles of Starbirth',
     summary: 'Journey into the heart of interstellar gas pillars where gravitational collapse compresses dark cold molecular hydrogen until thermonuclear fusion ignites first light.',
     readTimeMinutes: 7,
-    heroImage: '/assets/images/cosmic_stellar_nebula_1791661085694.jpg',
+    heroImage: cosmicImages.cosmicStellarNebula.url,
     associatedDsoId: 'm42',
     keyMetrics: [
       { label: 'Protostar Ignition Core Temp', value: '10,000,000', unit: 'Kelvin' },
@@ -110,7 +111,7 @@ export const chaptersData: ChapterData[] = [
     subtitle: 'Kinematics & Morphology of the Milky Way',
     summary: 'Zoom out to the grand galactic scale. Trace the Perseus, Scutum-Centaurus, and Sagittarius arms orbiting our galaxy’s supermassive core through dark matter halos.',
     readTimeMinutes: 8,
-    heroImage: '/assets/images/spiral_galaxy_core_1791661096182.jpg',
+    heroImage: cosmicImages.spiralGalaxyCore.url,
     associatedDsoId: 'm31',
     keyMetrics: [
       { label: 'Galactic Diameter', value: '100,000+', unit: 'Light Years' },
@@ -152,7 +153,7 @@ export const chaptersData: ChapterData[] = [
     subtitle: 'Event Horizons, Frame Dragging & Relativistic Lensing',
     summary: 'Peer over the threshold of physical reality where the escape velocity exceeds the speed of light, spacetime curvature goes infinite, and time grinds to a relative standstill.',
     readTimeMinutes: 9,
-    heroImage: '/assets/images/supermassive_black_hole_1791661107412.jpg',
+    heroImage: cosmicImages.supermassiveBlackHole.url,
     associatedDsoId: 'sagittarius_a_star',
     keyMetrics: [
       { label: 'Sgr A* Mass', value: '4.15 × 10⁶', unit: 'Solar Masses' },
@@ -194,7 +195,7 @@ export const chaptersData: ChapterData[] = [
     subtitle: 'Habitable Zones, Super-Earths & Atmospheric Biosignatures',
     summary: 'Discover thousands of alien worlds orbiting distant suns. Explore ocean planets without dry land, tidally locked eyeballs, and atmospheric searches for methane and ozone.',
     readTimeMinutes: 7,
-    heroImage: '/assets/images/celestial_moon_surface_1791661072908.jpg',
+    heroImage: cosmicImages.celestialMoon.url,
     associatedPlanetId: 'venus',
     keyMetrics: [
       { label: 'Confirmed Exoplanets', value: '5,600+', unit: 'Discovered' },
@@ -236,7 +237,7 @@ export const chaptersData: ChapterData[] = [
     subtitle: 'Cosmic Microwave Background, Cosmic Inflation & Deep Time',
     summary: 'Travel backwards 13.8 billion years to the Big Bang’s primordial glow, and peer forward across trillions of years toward the Heat Death of the cosmos.',
     readTimeMinutes: 8,
-    heroImage: '/assets/images/spiral_galaxy_core_1791661096182.jpg',
+    heroImage: cosmicImages.spiralGalaxyCore.url,
     associatedDsoId: 'm31',
     keyMetrics: [
       { label: 'Age of the Universe', value: '13.787', unit: 'Billion Years' },
@@ -276,7 +277,7 @@ export const chaptersData: ChapterData[] = [
     subtitle: 'Core-Collapse Cataclysms, Nucleosynthesis & Relativistic Shocks',
     summary: 'Stand witness to the most violent detonations in the universe. Discover how collapsing iron cores unleash blinding thermonuclear shockwaves, forging the heavy elements essential for rocky worlds and life.',
     readTimeMinutes: 8,
-    heroImage: '/assets/images/supernova_cosmic_explosion_1791711683777.jpg',
+    heroImage: cosmicImages.supernovaCosmicExplosion.url,
     associatedDsoId: 'sn_1987a',
     keyMetrics: [
       { label: 'Peak Energy Output', value: '10⁴⁴', unit: 'Joules (10⁴⁹ ergs)' },
@@ -326,7 +327,7 @@ export const chaptersData: ChapterData[] = [
     subtitle: 'Cosmic Leviathans, Einstein Arcs & The Intracluster Medium',
     summary: 'Explore the grandest gravitationally bound structures in the universe. Witness how trillions of solar masses bend the fabric of space, acting as cosmic magnifying glasses to unveil the earliest infant galaxies.',
     readTimeMinutes: 9,
-    heroImage: '/assets/images/galaxy_cluster_deepfield_1791711670367.jpg',
+    heroImage: cosmicImages.galaxyClusterDeepfield.url,
     associatedDsoId: 'abell_2744',
     keyMetrics: [
       { label: 'Total Cluster Mass', value: '10¹⁴–10¹⁵', unit: 'Solar Masses' },
@@ -376,7 +377,7 @@ export const chaptersData: ChapterData[] = [
     subtitle: 'Supersonic Shocks, Dark Matter Decoupling & Remnant Relics',
     summary: 'Observe the most energetic cosmic event since the Big Bang: two giant galaxy clusters colliding at supersonic speeds, peeling apart ordinary baryonic gas from the dark matter scaffold of the universe.',
     readTimeMinutes: 8,
-    heroImage: '/assets/images/galaxy_cluster_collision_1791711722403.jpg',
+    heroImage: cosmicImages.galaxyClusterCollision.url,
     associatedDsoId: 'bullet_cluster',
     keyMetrics: [
       { label: 'Collision Speed', value: '4,500', unit: 'km / s (Mach ~3)' },

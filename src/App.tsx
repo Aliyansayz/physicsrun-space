@@ -17,6 +17,8 @@ import { StarMap3D } from './components/starmap/StarMap3D';
 import { AstroLensView } from './components/astrolens/AstroLensView';
 import { SearchModal } from './components/search/SearchModal';
 import { DetailModal, DetailModalData } from './components/common/DetailModal';
+import { ResponsiveImage } from './components/common/ResponsiveImage';
+import { cosmicImages } from './assets/images';
 import { chaptersData } from './data/chaptersData';
 
 export default function App() {
@@ -97,12 +99,16 @@ export default function App() {
       
       {/* Global Space Galactic Supernova Background Layer (visible through translucent glass cards) */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        <img
-          src="/assets/images/supernova_cosmic_explosion_1791711683777.jpg"
+        <ResponsiveImage
+          picture={cosmicImages.supernovaCosmicExplosion.picture}
           alt="Galactic Supernova Explosion"
-          className="w-full h-full object-cover object-center opacity-30 filter brightness-[0.72] contrast-[1.2]"
-          loading="eager"
+          className="w-full h-full object-cover object-center opacity-30"
+          sizes="100vw"
+          priority
         />
+        {/* A static overlay replaces the old `brightness/contrast` CSS filter, which
+            repainted a full-screen image on every scroll frame. */}
+        <div className="absolute inset-0 bg-[#05070e]/25 pointer-events-none" />
         {/* Subtle radial and linear depth scrims so typography retains high contrast */}
         <div className="absolute inset-0 bg-radial-at-c from-transparent via-[#05070e]/50 to-[#05070e]/90" />
         <div className="absolute inset-0 bg-gradient-to-b from-[#05070e]/70 via-transparent to-[#05070e]/95" />
