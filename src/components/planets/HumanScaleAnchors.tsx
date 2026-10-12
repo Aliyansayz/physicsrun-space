@@ -22,14 +22,15 @@ export const HumanScaleAnchors: React.FC<HumanScaleAnchorsProps> = ({ planet }) 
   const [activeTab, setActiveTab] = useState<'weight' | 'travel' | 'sensory' | 'pocket-scale'>('weight');
 
   // Surface gravity calculation
-  const gravityVal = parseFloat(planet.surfaceGravity);
+  const gravityMatch = planet.surfaceGravity.match(/[\d.]+/);
+  const gravityVal = gravityMatch ? parseFloat(gravityMatch[0]) : 9.81;
   const weightRatio = gravityVal / 9.81;
   const planetWeightKg = Math.round(earthWeightKg * weightRatio * 10) / 10;
   const planetWeightLbs = Math.round(planetWeightKg * 2.20462 * 10) / 10;
 
   // Travel time calculations
   // Distance from Earth in km (approximate average distance)
-  const distanceAUFromEarth = Math.abs(planet.distanceFromSunAU - 1.0) || 0.00257; // Moon is ~0.00257 AU
+  const distanceAUFromEarth = planet.id === 'moon' ? 0.00257 : Math.abs(planet.distanceFromSunAU - 1.0);
   const distanceKm = distanceAUFromEarth * 149597870.7;
 
   const jetSpeedKmh = 900;

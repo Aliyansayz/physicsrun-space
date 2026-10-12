@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Shuffle } from 'lucide-react';
 import { cosmicImages } from '../../assets/images';
+import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
 
 const EBOOK_PICTURES = [
   {
@@ -54,12 +55,15 @@ const EBOOK_PICTURES = [
 ];
 
 export const HeroCelestialVisual: React.FC = () => {
-  const [currentIdx, setCurrentIdx] = useState<number>(() => 
+  const [currentIdx, setCurrentIdx] = useState<number>(() =>
     Math.floor(Math.random() * EBOOK_PICTURES.length)
   );
+  const [isHovered, setIsHovered] = useState(false);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
-  // Auto-randomize image every 16 seconds
+  // Auto-randomize image every 16 seconds (pauses on hover, disabled for reduced motion)
   useEffect(() => {
+    if (prefersReducedMotion || isHovered) return;
     const timer = setInterval(() => {
       setCurrentIdx((prev) => {
         let next = Math.floor(Math.random() * EBOOK_PICTURES.length);
@@ -68,7 +72,7 @@ export const HeroCelestialVisual: React.FC = () => {
       });
     }, 16000);
     return () => clearInterval(timer);
-  }, []);
+  }, [prefersReducedMotion, isHovered]);
 
   const handleShuffle = (e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
@@ -82,7 +86,11 @@ export const HeroCelestialVisual: React.FC = () => {
   const activePicture = EBOOK_PICTURES[currentIdx];
 
   return (
-    <div className="relative w-full aspect-[16/10] max-w-[620px] mx-auto select-none group">
+    <div
+      className="relative w-full aspect-[16/10] max-w-[620px] mx-auto select-none group"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       {/* Outer ambient glow & nebula backscatter */}
       <div className="absolute -inset-6 bg-gradient-to-tr from-cyan-600/20 via-sky-500/15 to-indigo-600/10 rounded-3xl blur-[60px] pointer-events-none opacity-80 animate-pulse duration-10000" />
 

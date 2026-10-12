@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { TargetHotspot, SpectralWavelength } from '../../types/astrolens';
 import { astroSonification } from '../../services/astroSonification';
 import { Crosshair, Radio, Zap, Sparkles, Orbit, Compass, Activity } from 'lucide-react';
@@ -33,6 +33,7 @@ export const ObservationReticle: React.FC<ObservationReticleProps> = ({
   cursorCoords,
 }) => {
   const [hoveredHotspot, setHoveredHotspot] = useState<TargetHotspot | null>(null);
+  const lastPingRef = useRef(0);
 
   const activeFocus = selectedHotspot || hoveredHotspot;
 
@@ -48,7 +49,11 @@ export const ObservationReticle: React.FC<ObservationReticleProps> = ({
 
   const handleHotspotMouseEnter = (hotspot: TargetHotspot) => {
     setHoveredHotspot(hotspot);
-    astroSonification.playHotspotPing(hotspot.type);
+    const now = Date.now();
+    if (now - lastPingRef.current > 2000) {
+      lastPingRef.current = now;
+      astroSonification.playHotspotPing(hotspot.type);
+    }
   };
 
   return (

@@ -165,6 +165,8 @@ export const deleteCapturedSnapshot = (snapshotId: string): DiscoveryProgress =>
     ...current,
     capturedSnapshots: current.capturedSnapshots.filter((s) => s.id !== snapshotId),
   };
+  // Re-evaluate badges after deletion
+  updated.unlockedBadgeIds = OBSERVATION_BADGES.filter((b) => b.isUnlocked(updated)).map((b) => b.id);
   saveDiscoveryProgress(updated);
   return updated;
 };

@@ -25,17 +25,16 @@ export const Header: React.FC<HeaderProps> = ({
   readerChapterTitle,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
 
+  // Close mobile drawer on Escape key
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+    if (!mobileMenuOpen) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMobileMenuOpen(false);
     };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [mobileMenuOpen]);
 
   const handleToggleAmbient = () => {
     const isNowPlaying = ambientAudio.toggle();
@@ -64,10 +63,12 @@ export const Header: React.FC<HeaderProps> = ({
       }
     } else {
       setActiveView('landing');
-      setTimeout(() => {
-        const featuredElem = document.getElementById('featured-section');
-        if (featuredElem) featuredElem.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          const featuredElem = document.getElementById('featured-section');
+          if (featuredElem) featuredElem.scrollIntoView({ behavior: 'smooth' });
+        }, 50);
+      });
     }
     setMobileMenuOpen(false);
   };
@@ -232,7 +233,7 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[#060913]/98 backdrop-blur-xl border-b border-slate-900 px-6 py-6 space-y-4 animate-in fade-in duration-200">
+        <div role="dialog" aria-label="Navigation menu" className="md:hidden bg-[#060913]/98 backdrop-blur-xl border-b border-slate-900 px-6 py-6 space-y-4 animate-in fade-in duration-200">
           <button
             onClick={() => { 
               setActiveView('landing'); 

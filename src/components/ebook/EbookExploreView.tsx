@@ -196,9 +196,8 @@ export const EbookExploreView: React.FC<EbookExploreViewProps> = ({
   const currentCategoryData = categoryMap[selectedCategory];
 
   const displayedCards = useMemo(() => {
-    if (!searchQuery.trim()) return currentCategoryData.cards;
+    if (!searchQuery.trim()) return categoryMap[selectedCategory].cards;
     const q = searchQuery.toLowerCase();
-    // Search across all cards
     const all = [
       ...planetCards,
       ...starsCards,
@@ -206,12 +205,12 @@ export const EbookExploreView: React.FC<EbookExploreViewProps> = ({
       ...nebulaeCards,
       ...blackHolesCards,
     ];
-    return all.filter(c => 
-      c.name.toLowerCase().includes(q) || 
+    return all.filter(c =>
+      c.name.toLowerCase().includes(q) ||
       c.description.toLowerCase().includes(q) ||
       c.category.toLowerCase().includes(q)
     );
-  }, [searchQuery, currentCategoryData]);
+  }, [searchQuery, selectedCategory]);
 
   const handleCardClick = (card: CelestialCardItem) => {
     if (card.actionType === 'planet' && card.planetId && onOpenPlanetStudio) {

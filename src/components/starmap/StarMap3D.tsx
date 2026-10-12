@@ -4,6 +4,9 @@ import { ConstellationData, DeepSkyObject, StarData, SpectralClass } from '../..
 import { constellationsData, starsData, deepSkyObjectsData } from '../../data/starMapData';
 import { narrationAudio } from '../../services/narrationAudio';
 import { StellarThermometer } from './StellarThermometer';
+
+// Cache star name lookups in a Map for O(1) access
+const starNameMap = new Map(starsData.map(s => [s.name, s]));
 import { 
   Sparkles, 
   Volume2, 
@@ -267,8 +270,8 @@ export const StarMap3D: React.FC<StarMap3DProps> = ({
         constellation.connections.forEach(([i1, i2]) => {
           const star1Name = constellation.mainStars[i1];
           const star2Name = constellation.mainStars[i2];
-          const s1 = starsData.find(s => s.name === star1Name);
-          const s2 = starsData.find(s => s.name === star2Name);
+          const s1 = starNameMap.get(star1Name);
+          const s2 = starNameMap.get(star2Name);
 
           if (s1 && s2) {
             const p1 = coordsToVector3(s1.coordinates.raHours, s1.coordinates.decDegrees, 47.9);

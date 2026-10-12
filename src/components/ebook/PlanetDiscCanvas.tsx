@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 interface PlanetDiscCanvasProps {
   planetId: string;
@@ -12,6 +12,19 @@ export const PlanetDiscCanvas: React.FC<PlanetDiscCanvasProps> = ({
   className = '',
 }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const prevPlanetRef = useRef<string>(planetId);
+
+  // Handle DPR changes (e.g., moving window between displays)
+  useEffect(() => {
+    const mq = window.matchMedia(`(resolution: ${window.devicePixelRatio}dppx)`);
+    const handler = () => {
+      // Force re-render by updating state
+      setIsTransitioning(false);
+    };
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -93,6 +106,10 @@ export const PlanetDiscCanvas: React.FC<PlanetDiscCanvasProps> = ({
 
     ctx.restore();
 
+    // Track planet changes for transition
+    if (prevPlanetRef.current !== planetId) {
+      prevPlanetRef.current = planetId;
+    }
   }, [planetId, size]);
 
   return (

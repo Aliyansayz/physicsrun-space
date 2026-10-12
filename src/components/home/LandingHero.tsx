@@ -1,10 +1,9 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
+import { StarryNightSky } from './StarryNightSky';
 
 interface LandingHeroProps {
   onStartExploring: () => void;
-  onOpenPlanets?: () => void;
-  onOpenStarMap?: () => void;
 }
 
 export const LandingHero: React.FC<LandingHeroProps> = ({
@@ -13,7 +12,8 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
   return (
     <section className="relative min-h-[96vh] pt-36 pb-28 flex items-center overflow-hidden bg-[#060913]">
 
-
+      {/* Starry Night Sky Background */}
+      <StarryNightSky />
 
       {/* Main Content Area */}
       <div className="max-w-7xl mx-auto px-6 sm:px-8 w-full relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pointer-events-none">
@@ -49,12 +49,13 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
       </div>
 
       {/* Scroll to Explore Indicator */}
-      <div
+      <button
         onClick={() => {
           const el = document.getElementById('explore-section');
           el?.scrollIntoView({ behavior: 'smooth' });
         }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer z-20"
+        aria-label="Scroll to explore section"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer z-20 focus-visible:ring-2 focus-visible:ring-cyan-400/60 rounded-lg p-2"
       >
         <span className="text-[10px] font-mono tracking-[0.25em] text-cyan-300/80 uppercase select-none">
           Scroll to explore
@@ -62,7 +63,7 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
         <div className="w-5 h-8 rounded-full border border-cyan-400/30 flex items-start justify-center p-1.5 backdrop-blur-sm bg-slate-950/40 shadow-[0_0_12px_rgba(34,211,238,0.2)]">
           <div className="w-1 h-2 rounded-full bg-cyan-300" />
         </div>
-      </div>
+      </button>
     </section>
   );
 };

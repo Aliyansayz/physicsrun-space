@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { planetsData } from '../../data/planetsData';
 import { constellationsData, starsData, deepSkyObjectsData } from '../../data/starMapData';
 import { chaptersData } from '../../data/chaptersData';
 import { Search, X, BookOpen, Compass, Sparkles, ArrowRight } from 'lucide-react';
 
 import { ASTROLENS_EPISODES } from '../../data/astrolensData';
+import { useDebouncedValue } from '../../hooks/useDebouncedValue';
 
 interface SearchResult {
   id: string;
@@ -33,15 +34,20 @@ export const SearchModal: React.FC<SearchModalProps> = ({
 }) => {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<SearchResult[]>([]);
+  const [activeIndex, setActiveIndex] = useState(-1);
+  const debouncedQuery = useDebouncedValue(query, 200);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const resultsRef = useRef<HTMLDivElement>(null);
 
   // Build searchable index
   useEffect(() => {
-    if (!query.trim()) {
+    if (!debouncedQuery.trim()) {
       setResults([]);
+      setActiveIndex(-1);
       return;
     }
 
-    const q = query.toLowerCase();
+    const q = debouncedQuery.toLowerCase();
     const matches: SearchResult[] = [];
 
     // Chapters
@@ -136,13 +142,57 @@ export const SearchModal: React.FC<SearchModalProps> = ({
     });
 
     setResults(matches);
-  }, [query]);
+  }, [debouncedQuery]);
 
-  // Escape key handler
+  // Keyboard navigation through results + focus trap
+  const handleSearchKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (results.length === 0) return;
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setActiveIndex(prev => (prev + 1) % results.length);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setActiveIndex(prev => (prev <= 0 ? results.length - 1 : prev - 1));
+    } else if (e.key === 'Enter' && activeIndex >= 0) {
+      e.preventDefault();
+      handleSelectResult(results[activeIndex]);
+    }
+  }, [results, activeIndex]);
+
+  // Scroll active result into view
   useEffect(() => {
+    if (activeIndex < 0 || !resultsRef.current) return;
+    const activeEl = resultsRef.current.children[activeIndex] as HTMLElement;
+    if (activeEl) activeEl.scrollIntoView({ block: 'nearest' });
+  }, [activeIndex]);
+
+  // Escape key handler + focus trap
+  useEffect(() => {
+    if (!isOpen) return;
+
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isOpen) {
+      if (e.key === 'Escape') {
         onClose();
+        return;
+      }
+      // Simple focus trap: keep focus within modal
+      if (e.key === 'Tab') {
+        const modal = document.querySelector('[role="dialog"]');
+        if (!modal) return;
+        const focusable = modal.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
       }
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -172,17 +222,21 @@ export const SearchModal: React.FC<SearchModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center pt-24 px-4 bg-[#05070e]/85 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="bg-[#090d1f] border border-slate-800 rounded-2xl max-w-xl w-full p-6 relative shadow-2xl overflow-hidden">
+      <div role="dialog" aria-label="Search the cosmos" className="bg-[#090d1f] border border-slate-800 rounded-2xl max-w-xl w-full p-6 relative shadow-2xl overflow-hidden">
         
         {/* Search Input Bar */}
         <div className="flex items-center space-x-3 pb-4 border-b border-slate-800">
           <Search className="w-5 h-5 text-slate-400" />
           <input
+            ref={inputRef}
             type="text"
             value={query}
             onChange={e => setQuery(e.target.value)}
+            onKeyDown={handleSearchKeyDown}
             placeholder="Search planets, galaxies, stars, constellations, or episodes..."
             autoFocus
+            aria-expanded={results.length > 0}
+            aria-activedescendant={activeIndex >= 0 ? `search-result-${activeIndex}` : undefined}
             className="flex-1 bg-transparent text-slate-100 placeholder-slate-500 focus:outline-none text-sm font-light"
           />
           {query && (
@@ -229,15 +283,23 @@ export const SearchModal: React.FC<SearchModalProps> = ({
 
         {/* Search Results List */}
         {results.length > 0 && (
-          <div className="pt-4 max-h-96 overflow-y-auto space-y-2">
+          <div ref={resultsRef} className="pt-4 max-h-96 overflow-y-auto space-y-2" role="listbox">
             <span className="text-[10px] font-mono uppercase tracking-widest text-cyan-400 block mb-2">
               Found {results.length} Matches
             </span>
-            {results.map(item => (
+            {results.map((item, index) => (
               <div
+                id={`search-result-${index}`}
                 key={`${item.category}-${item.id}`}
+                role="option"
+                aria-selected={index === activeIndex}
                 onClick={() => handleSelectResult(item)}
-                className="p-3 rounded-xl bg-slate-900/50 hover:bg-slate-800/80 border border-slate-800/80 hover:border-slate-700 cursor-pointer transition-all flex items-center justify-between"
+                onMouseEnter={() => setActiveIndex(index)}
+                className={`p-3 rounded-xl bg-slate-900/50 border border-slate-800/80 cursor-pointer transition-all flex items-center justify-between ${
+                  index === activeIndex
+                    ? 'bg-slate-800/80 border-slate-700 ring-1 ring-cyan-400/40'
+                    : 'hover:bg-slate-800/80 hover:border-slate-700'
+                }`}
               >
                 <div className="flex items-center gap-3">
                   <div className="w-7 h-7 rounded-lg bg-slate-800 flex items-center justify-center text-slate-300 shrink-0">

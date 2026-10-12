@@ -51,22 +51,24 @@ const ObservatoryParallaxCard: React.FC<ObservatoryParallaxCardProps> = ({
 }) => {
   return (
     <div
+      onClick={() => onOpenModal({
+        category: topic.category,
+        title: topic.title,
+        description: topic.shortDesc,
+        imageUrl: topic.image.img.src,
+        actionText: topic.actionText,
+        onAction: topic.onAction,
+      })}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onOpenModal({ category: topic.category, title: topic.title, description: topic.shortDesc, imageUrl: topic.image.img.src, actionText: topic.actionText, onAction: topic.onAction }); } }}
+      role="button"
+      tabIndex={0}
+      aria-label={`${topic.title} — ${topic.shortDesc}`}
       className={`group flex flex-col backdrop-blur-xl bg-slate-950/35 border ${
         isFirstCard ? 'border-cyan-400/35' : 'border-white/15'
-      } rounded-2xl p-4 shadow-[0_8px_32px_0_rgba(0,0,0,0.45)] relative overflow-visible cursor-default`}
+      } rounded-2xl p-4 shadow-[0_8px_32px_0_rgba(0,0,0,0.45)] relative overflow-visible cursor-pointer transition-transform duration-300 hover:scale-105 focus-visible:ring-2 focus-visible:ring-cyan-400/60`}
     >
       {/* High-Resolution Image Frame */}
-      <div
-        onClick={() => onOpenModal({
-          category: topic.category,
-          title: topic.title,
-          description: topic.shortDesc,
-          imageUrl: topic.image.img.src,
-          actionText: topic.actionText,
-          onAction: topic.onAction,
-        })}
-        className="aspect-[16/10] rounded-xl overflow-hidden bg-black/50 relative border border-white/10 transition-colors cursor-pointer"
-      >
+      <div className="aspect-[16/10] rounded-xl overflow-hidden bg-black/50 relative border border-white/10 transition-colors">
         <ResponsiveImage
           picture={topic.image}
           alt={topic.title}
@@ -85,12 +87,8 @@ const ObservatoryParallaxCard: React.FC<ObservatoryParallaxCardProps> = ({
 
         {/* Inspect Overlay Trigger */}
         <div
-          className="absolute inset-0 bg-gradient-to-t from-black/85 via-cyan-950/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-between p-3"
-        >
-          <span className="text-[11px] font-mono text-cyan-200 flex items-center gap-1.5 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
-            <Eye className="w-3.5 h-3.5 text-cyan-400" /> High-Res Inspection
-          </span>
-        </div>
+          className="absolute inset-0 bg-gradient-to-t from-black/85 via-cyan-950/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"
+        />
       </div>
 
       {/* Card Body Details */}

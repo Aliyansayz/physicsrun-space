@@ -101,23 +101,11 @@ export const AstroLensViewport: React.FC<AstroLensViewportProps> = ({
       });
     }
 
-    // Dynamic RA / Dec simulation from cursor position
-    if (containerRef.current) {
-      const rect = containerRef.current.getBoundingClientRect();
-      const relX = (e.clientX - rect.left) / rect.width;
-      const relY = (e.clientY - rect.top) / rect.height;
-
-      // Generate slight offsets around the target's celestial coordinates
-      const raH = 7 + Math.floor(relX * 2);
-      const raM = Math.floor(relX * 59);
-      const raS = (relX * 59).toFixed(1);
-      const decD = -73 + Math.floor(relY * 2);
-      const decM = Math.floor(relY * 59);
-      const decS = (relY * 59).toFixed(1);
-
+    // Show actual target coordinates from episode telemetry
+    if (containerRef.current && !cursorCoords) {
       setCursorCoords({
-        ra: `${raH.toString().padStart(2, '0')}h ${raM.toString().padStart(2, '0')}m ${raS}s`,
-        dec: `${decD}° ${decM}′ ${decS}″`,
+        ra: episode.telemetry.rightAscension,
+        dec: episode.telemetry.declination,
       });
     }
   };
@@ -144,9 +132,17 @@ export const AstroLensViewport: React.FC<AstroLensViewportProps> = ({
     }
   };
 
+  // Sync fullscreen state with ESC key exit
+  useEffect(() => {
+    const handler = () => setIsFullscreen(!!document.fullscreenElement);
+    document.addEventListener('fullscreenchange', handler);
+    return () => document.removeEventListener('fullscreenchange', handler);
+  }, []);
+
   // Capture Telemetry-Stamped Snapshot
   const handleCaptureSnapshot = useCallback(() => {
     astroSonification.playShutterSound();
+    try {
 
     const canvas = document.createElement('canvas');
     canvas.width = 1400;
@@ -229,7 +225,11 @@ export const AstroLensViewport: React.FC<AstroLensViewportProps> = ({
 
       setSnapshotToast('Snapshot logged into Observatory Logbook!');
       setTimeout(() => setSnapshotToast(null), 3500);
-    };
+    } catch (err) {
+      console.error('Snapshot capture failed:', err);
+      setSnapshotToast('Snapshot unavailable — CORS policy prevented capture');
+      setTimeout(() => setSnapshotToast(null), 3000);
+    }
   }, [episode, activeWavelength, zoomLevel]);
 
   const activeBand = SPECTRAL_BANDS[activeWavelength];

@@ -68,8 +68,10 @@ export const SpectralAnalysisDrawer: React.FC<SpectralAnalysisDrawerProps> = ({
 
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="p-1.5 rounded-lg border border-slate-800 text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors cursor-pointer"
+          className="p-1.5 rounded-lg border border-slate-800 text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-cyan-400/60"
           title={isExpanded ? 'Collapse Analysis' : 'Expand Analysis'}
+          aria-expanded={isExpanded}
+          aria-controls="spectral-drawer-content"
         >
           {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
         </button>

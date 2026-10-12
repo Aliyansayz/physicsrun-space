@@ -124,7 +124,8 @@ class NarrationService {
       if (onEnd) onEnd();
     };
 
-    utterance.onerror = () => {
+    utterance.onerror = (event: SpeechSynthesisErrorEvent) => {
+      console.error('Narration error:', event.error);
       this.isSpeaking = false;
       this.isPaused = false;
       this.stopKeepAlive();

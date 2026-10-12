@@ -91,7 +91,8 @@ export const PlanetViewer3D: React.FC<PlanetViewer3DProps> = ({
     setIsDropping(true);
     setDropHeight(0);
 
-    const gNum = parseFloat(selectedPlanet.surfaceGravity);
+    const gravityMatch = selectedPlanet.surfaceGravity.match(/[\d.]+/);
+    const gNum = gravityMatch ? parseFloat(gravityMatch[0]) : 9.81;
     // Real fall time for 10 meters: t = sqrt(2 * 10 / g)
     // Feathers in vacuum fall at the exact same rate as rovers (Galileo / Apollo 15 hammer-feather proof)!
     const fallDurationMs = Math.max(250, Math.sqrt((2 * 10) / gNum) * 1000);

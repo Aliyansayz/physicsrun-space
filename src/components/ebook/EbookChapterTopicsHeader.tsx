@@ -26,8 +26,10 @@ export const EbookChapterTopicsHeader: React.FC<EbookChapterTopicsHeaderProps> =
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
-      const scrollAmount = direction === 'left' ? -380 : 380;
-      scrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      const card = scrollRef.current.querySelector<HTMLElement>('[data-chapter-card]');
+      const gap = 20; // space-x-5
+      const scrollAmount = card ? card.offsetWidth + gap : 380;
+      scrollRef.current.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
     }
   };
 
@@ -40,13 +42,13 @@ export const EbookChapterTopicsHeader: React.FC<EbookChapterTopicsHeaderProps> =
 
   const filteredChapters = chaptersData.filter((chap) => {
     if (selectedTag === 'solar') {
-      return chap.episodeNumber === 1 || chap.episodeNumber === 5;
+      return chap.id === 'episode-01' || chap.id === 'episode-05';
     }
     if (selectedTag === 'deep-space') {
-      return chap.episodeNumber === 2 || chap.episodeNumber === 3 || chap.episodeNumber === 6 || chap.episodeNumber === 8;
+      return chap.id === 'episode-02' || chap.id === 'episode-03' || chap.id === 'episode-06' || chap.id === 'episode-08';
     }
     if (selectedTag === 'relativity') {
-      return chap.episodeNumber === 4 || chap.episodeNumber === 7 || chap.episodeNumber === 9;
+      return chap.id === 'episode-04' || chap.id === 'episode-07' || chap.id === 'episode-09';
     }
     return true;
   });
@@ -189,8 +191,13 @@ const ChapterTopicCard: React.FC<ChapterTopicCardProps> = ({
 }) => {
   return (
     <div
+      data-chapter-card
       onClick={() => onSelectChapter(chapter.id)}
-      className={`group backdrop-blur-xl bg-slate-950/35 hover:bg-slate-900/50 border border-white/15 hover:border-cyan-400/50 rounded-2xl overflow-hidden transition-all duration-300 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] hover:shadow-[0_8px_32px_0_rgba(6,182,212,0.25)] hover:-translate-y-1.5 cursor-pointer flex flex-col justify-between ${className}`}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === 'Space') { e.preventDefault(); onSelectChapter(chapter.id); } }}
+      role="button"
+      tabIndex={0}
+      aria-label={`Read chapter: ${chapter.title}`}
+      className={`group backdrop-blur-xl bg-slate-950/35 hover:bg-slate-900/50 border border-white/15 hover:border-cyan-400/50 rounded-2xl overflow-hidden transition-all duration-300 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] hover:shadow-[0_8px_32px_0_rgba(6,182,212,0.25)] hover:-translate-y-1.5 cursor-pointer focus-visible:ring-2 focus-visible:ring-cyan-400/60 flex flex-col justify-between ${className}`}
     >
       <div>
         {/* Chapter Image with Aspect Ratio and Gradient Overlay */}

@@ -31,7 +31,8 @@ class AmbientAudioService {
     if (this.ctx.state === 'suspended') {
       try {
         await this.ctx.resume();
-      } catch {
+      } catch (err) {
+        console.error('Ambient audio resume failed:', err);
         return false;
       }
     }
@@ -165,7 +166,8 @@ class AmbientAudioService {
 
       this.isPlaying = true;
       return true;
-    } catch {
+    } catch (err) {
+      console.error('Ambient audio start failed:', err);
       return false;
     }
   }

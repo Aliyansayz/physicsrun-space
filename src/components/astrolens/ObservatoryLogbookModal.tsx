@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { DiscoveryProgress } from '../../types/astrolens';
 import { OBSERVATION_BADGES, deleteCapturedSnapshot } from '../../services/astrolensStorage';
 import { ASTROLENS_EPISODES } from '../../data/astrolensData';
@@ -38,6 +38,28 @@ export const ObservatoryLogbookModal: React.FC<ObservatoryLogbookModalProps> = (
   progress,
   onProgressUpdated,
 }) => {
+  const [confirmingDeleteId, setConfirmingDeleteId] = useState<string | null>(null);
+
+  // Focus trap + Escape handler
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') { onClose(); return; }
+      if (e.key === 'Tab') {
+        const modal = document.querySelector('[role="dialog"]');
+        if (!modal) return;
+        const focusable = modal.querySelectorAll<HTMLElement>('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   const totalEpisodes = ASTROLENS_EPISODES.length;
@@ -52,8 +74,14 @@ export const ObservatoryLogbookModal: React.FC<ObservatoryLogbookModalProps> = (
 
   const handleDeleteSnapshot = (id: string, e: React.MouseEvent) => {
     e.stopPropagation();
-    const updated = deleteCapturedSnapshot(id);
-    onProgressUpdated(updated);
+    if (confirmingDeleteId === id) {
+      setConfirmingDeleteId(null);
+      const updated = deleteCapturedSnapshot(id);
+      onProgressUpdated(updated);
+    } else {
+      setConfirmingDeleteId(id);
+      setTimeout(() => setConfirmingDeleteId(null), 3000);
+    }
   };
 
   const handleDownloadSnapshot = (dataUrl: string, title: string) => {
@@ -66,7 +94,7 @@ export const ObservatoryLogbookModal: React.FC<ObservatoryLogbookModalProps> = (
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
+    <div role="dialog" aria-label="Observatory Logbook" className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
       <div className="relative w-full max-w-4xl max-h-[90vh] bg-[#060a17] border border-slate-800 rounded-2xl shadow-2xl flex flex-col overflow-hidden text-left">
         
         {/* Header */}

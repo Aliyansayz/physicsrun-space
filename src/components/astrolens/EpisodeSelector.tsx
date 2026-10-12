@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { AstroLensEpisode, EpisodeCategory, SpectralWavelength } from '../../types/astrolens';
 import { ASTROLENS_EPISODES } from '../../data/astrolensData';
 import { Search, Compass, Eye, Sparkles, Filter } from 'lucide-react';
@@ -26,19 +26,21 @@ export const EpisodeSelector: React.FC<EpisodeSelectorProps> = ({
   const [selectedCategory, setSelectedCategory] = useState<EpisodeCategory>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
 
-  const filteredEpisodes = ASTROLENS_EPISODES.filter((ep) => {
-    const matchesCategory = selectedCategory === 'All' || ep.category === selectedCategory;
-    const query = searchQuery.toLowerCase().trim();
-    const matchesQuery =
-      query === '' ||
-      ep.title.toLowerCase().includes(query) ||
-      ep.subtitle.toLowerCase().includes(query) ||
-      ep.telemetry.designation.toLowerCase().includes(query) ||
-      ep.telemetry.constellation.toLowerCase().includes(query) ||
-      ep.tags.some((t) => t.toLowerCase().includes(query));
+  const filteredEpisodes = useMemo(() => {
+    return ASTROLENS_EPISODES.filter((ep) => {
+      const matchesCategory = selectedCategory === 'All' || ep.category === selectedCategory;
+      const query = searchQuery.toLowerCase().trim();
+      const matchesQuery =
+        query === '' ||
+        ep.title.toLowerCase().includes(query) ||
+        ep.subtitle.toLowerCase().includes(query) ||
+        ep.telemetry.designation.toLowerCase().includes(query) ||
+        ep.telemetry.constellation.toLowerCase().includes(query) ||
+        ep.tags.some((t) => t.toLowerCase().includes(query));
 
-    return matchesCategory && matchesQuery;
-  });
+      return matchesCategory && matchesQuery;
+    });
+  }, [selectedCategory, searchQuery]);
 
   return (
     <div className="w-full space-y-4">
@@ -97,7 +99,11 @@ export const EpisodeSelector: React.FC<EpisodeSelectorProps> = ({
             <div
               key={ep.id}
               onClick={() => onSelectEpisode(ep)}
-              className={`group relative flex flex-col rounded-xl overflow-hidden border transition-all duration-300 cursor-pointer ${
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onSelectEpisode(ep); } }}
+              role="button"
+              tabIndex={0}
+              aria-label={`${ep.title} — ${ep.subtitle}`}
+              className={`group relative flex flex-col rounded-xl overflow-hidden border transition-all duration-300 cursor-pointer hover:scale-105 focus-visible:ring-2 focus-visible:ring-cyan-400/60 ${
                 isSelected
                   ? 'bg-slate-900/90 border-cyan-400/90 shadow-xl shadow-cyan-950/40 ring-1 ring-cyan-400/40'
                   : 'bg-[#060a17]/80 border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/60 shadow-lg'
@@ -181,6 +187,10 @@ export const EpisodeSelector: React.FC<EpisodeSelectorProps> = ({
           );
         })}
       </div>
+
+      <span className="sr-only" aria-live="polite">
+        {filteredEpisodes.length} episodes found
+      </span>
 
       {filteredEpisodes.length === 0 && (
         <div className="text-center py-12 bg-[#060a17]/50 rounded-xl border border-slate-800">

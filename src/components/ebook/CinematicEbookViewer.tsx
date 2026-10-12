@@ -96,25 +96,32 @@ export const CinematicEbookViewer: React.FC<CinematicEbookViewerProps> = ({
     });
   }, [currentChapter]);
 
-  const getParagraphSentences = (text: string) => {
-    const regex = /[^.!?]+[.!?]+(\s|$)/g;
-    let match;
-    const sentences: { text: string; start: number; end: number }[] = [];
-    let lastIdx = 0;
-    
-    while ((match = regex.exec(text)) !== null) {
-      const sText = match[0];
-      const start = match.index;
-      const end = start + sText.length;
-      sentences.push({ text: sText, start, end });
-      lastIdx = end;
-    }
-    
-    if (lastIdx < text.length) {
-      sentences.push({ text: text.substring(lastIdx), start: lastIdx, end: text.length });
-    }
-    
-    return sentences.length > 0 ? sentences : [{ text, start: 0, end: text.length }];
+  // Memoize sentence splitting per chapter — expensive regex, only recompute on chapter change
+  const allParagraphSentences = useMemo(() => {
+    return currentChapter.paragraphs.map(p => {
+      const regex = /[^.!?]+[.!?]+(\s|$)/g;
+      let match;
+      const sentences: { text: string; start: number; end: number }[] = [];
+      let lastIdx = 0;
+
+      while ((match = regex.exec(p.text)) !== null) {
+        const sText = match[0];
+        const start = match.index;
+        const end = start + sText.length;
+        sentences.push({ text: sText, start, end });
+        lastIdx = end;
+      }
+
+      if (lastIdx < p.text.length) {
+        sentences.push({ text: p.text.substring(lastIdx), start: lastIdx, end: p.text.length });
+      }
+
+      return sentences.length > 0 ? sentences : [{ text: p.text, start: 0, end: p.text.length }];
+    });
+  }, [currentChapter]);
+
+  const getParagraphSentences = (paragraphIndex: number) => {
+    return allParagraphSentences[paragraphIndex] || [];
   };
 
   useEffect(() => {
