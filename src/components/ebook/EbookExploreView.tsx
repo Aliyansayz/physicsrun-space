@@ -3,6 +3,7 @@ import { Search, Lightbulb, ArrowRight, Disc, Sparkles, Orbit, Cloud, CircleDot,
 import { HeroCelestialVisual } from './HeroCelestialVisual';
 import { PlanetDiscCanvas } from './PlanetDiscCanvas';
 import { EbookChapterTopicsHeader } from './EbookChapterTopicsHeader';
+import { CosmicShockers } from './CosmicShockers';
 import { cosmicImages } from '../../assets/images';
 
 interface EbookExploreViewProps {
@@ -320,6 +321,9 @@ export const EbookExploreView: React.FC<EbookExploreViewProps> = ({
           </div>
 
         </section>
+
+        {/* Cosmic Shockers — Shocking Physics & Energy Facts */}
+        <CosmicShockers />
 
         {/* =========================================================================
             MIDDLE SECTION:
