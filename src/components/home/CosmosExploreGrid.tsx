@@ -6,6 +6,7 @@ import { ResponsiveImage, type PictureData } from '../common/ResponsiveImage';
 
 const clusterCollision = cosmicImages.galaxyClusterCollision.picture;
 const clusterDeepField = cosmicImages.galaxyClusterDeepfield.picture;
+const supernovaCosmic = cosmicImages.supernovaCosmicExplosion.picture;
 const supernovaVeil = cosmicImages.supernovaRemnantVeil.picture;
 const supermassiveBlackHole = cosmicImages.supermassiveBlackHole.picture;
 const spiralGalaxyCore = cosmicImages.spiralGalaxyCore.picture;
