@@ -204,31 +204,34 @@ export const AstroLensViewport: React.FC<AstroLensViewportProps> = ({
         canvas.height - 30
       );
 
+      // Capture snapshot - wrap only the toDataURL/save in try/catch
+      let dataUrl: string | null = null;
       try {
-        const dataUrl = canvas.toDataURL('image/jpeg', 0.92);
-
-        // Save to local discovery storage
-        const snapshot = {
-          id: `snap_${Date.now()}`,
-          episodeId: episode.id,
-          episodeTitle: episode.title,
-          wavelength: activeWavelength,
-          timestamp: Date.now(),
-          imageUrl: dataUrl,
-          reticleCoords: { x: 50, y: 50 },
-          zoomLevel,
-          notes: `Captured in ${currentBand.label} via ${currentBand.telescope}`,
-        };
-
-        addCapturedSnapshot(snapshot);
-
-        setSnapshotToast('Snapshot logged into Observatory Logbook!');
-        setTimeout(() => setSnapshotToast(null), 3500);
+        dataUrl = canvas.toDataURL('image/jpeg', 0.92);
       } catch (err) {
         console.error('Snapshot capture failed:', err);
         setSnapshotToast('Snapshot unavailable — CORS policy prevented capture');
         setTimeout(() => setSnapshotToast(null), 3000);
+        return;
       }
+
+      // Save to local discovery storage
+      const snapshot = {
+        id: `snap_${Date.now()}`,
+        episodeId: episode.id,
+        episodeTitle: episode.title,
+        wavelength: activeWavelength,
+        timestamp: Date.now(),
+        imageUrl: dataUrl,
+        reticleCoords: { x: 50, y: 50 },
+        zoomLevel,
+        notes: `Captured in ${currentBand.label} via ${currentBand.telescope}`,
+      };
+
+      addCapturedSnapshot(snapshot);
+
+      setSnapshotToast('Snapshot logged into Observatory Logbook!');
+      setTimeout(() => setSnapshotToast(null), 3500);
     };
 
     // Handle image load errors (e.g., CORS)
