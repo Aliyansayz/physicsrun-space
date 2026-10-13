@@ -21,6 +21,10 @@
   }
 }
 
+.font-cinzel {
+  font-family: 'Cinzel', serif;
+}
+
 /* Elegant cosmic custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;

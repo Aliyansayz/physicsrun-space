@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { ChapterData } from '../../types';
 import { chaptersData } from '../../data/chaptersData';
 import { narrationAudio } from '../../services/narrationAudio';
+import { glossaryPhenomena } from '../../data/glossaryData';
 import { 
   Play, 
   Pause, 
@@ -21,6 +22,7 @@ interface CinematicEbookViewerProps {
   onOpenPlanetStudio?: (planetId: string) => void;
   onOpenStarMap?: (target?: { constellationId?: string; starId?: string; dsoId?: string }) => void;
   onOpenAstroLens?: (episodeId?: string) => void;
+  onOpenGlossary?: (termId?: string, fromChapterId?: string) => void;
 }
 
 interface HighlightItem {
@@ -37,6 +39,7 @@ export const CinematicEbookViewer: React.FC<CinematicEbookViewerProps> = ({
   onOpenPlanetStudio,
   onOpenStarMap,
   onOpenAstroLens,
+  onOpenGlossary,
 }) => {
   const [currentChapter, setCurrentChapter] = useState<ChapterData>(() => {
     return chaptersData.find(c => c.id === initialChapterId) || chaptersData[0];
@@ -76,8 +79,21 @@ export const CinematicEbookViewer: React.FC<CinematicEbookViewerProps> = ({
   const [activeParagraphIndex, setActiveParagraphIndex] = useState<number | null>(null);
   const [activeSentenceIndex, setActiveSentenceIndex] = useState<number | null>(null);
 
-  // Active Term Annotation Card
-  const [activeAnnotation, setActiveAnnotation] = useState<{ term: string; explanation: string } | null>(null);
+  // Active Term Annotation Card with glossary linkage
+  const [activeAnnotation, setActiveAnnotation] = useState<{ term: string; explanation: string; termId?: string } | null>(null);
+
+  // Helper to map term names to glossary IDs
+  const findGlossaryTermId = (termName: string): string => {
+    const normalized = termName.toLowerCase().trim();
+    const direct = glossaryPhenomena.find(p => p.term.toLowerCase() === normalized || p.id === normalized);
+    if (direct) return direct.id;
+    const partial = glossaryPhenomena.find(p => 
+      normalized.includes(p.term.toLowerCase()) || 
+      p.term.toLowerCase().includes(normalized) ||
+      p.id.replace(/-/g, ' ').includes(normalized)
+    );
+    return partial ? partial.id : 'gravitational-lensing';
+  };
 
   // Reading progress scroll tracker
   const contentContainerRef = useRef<HTMLDivElement>(null);
@@ -270,66 +286,58 @@ export const CinematicEbookViewer: React.FC<CinematicEbookViewerProps> = ({
         />
       </div>
 
-      {/* 3. ONE BUTTON ONLY: Back to Ebook Catalog (Glassmorphic) */}
-      <div className="fixed top-5 left-5 sm:top-6 sm:left-8 z-40">
+      {/* 3. Back to Ebook Catalog (Reduced size, sleek glassmorphic pill) */}
+      <div className="fixed top-3.5 left-3.5 sm:top-5 sm:left-6 z-40">
         <button
           onClick={onBackToLibrary}
-          className="group inline-flex items-center gap-2.5 px-4 sm:px-5 py-2.5 rounded-full bg-slate-950/35 hover:bg-slate-900/60 border border-white/20 hover:border-cyan-400 text-cyan-300 hover:text-white text-xs sm:text-sm font-medium tracking-wide shadow-2xl backdrop-blur-xl transition-all duration-200 cursor-pointer hover:scale-105 active:scale-95"
+          className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-950/50 hover:bg-slate-900/80 border border-white/15 hover:border-cyan-400/70 text-slate-300 hover:text-cyan-200 text-xs font-medium tracking-wide shadow-lg backdrop-blur-xl transition-all duration-200 cursor-pointer hover:scale-105 active:scale-95"
           title="Back to Ebook Catalog"
         >
-          <ArrowLeft className="w-4 h-4 text-cyan-400 group-hover:-translate-x-1 transition-transform" />
-          <span>Back to Ebook Catalog</span>
+          <ArrowLeft className="w-3.5 h-3.5 text-cyan-400 group-hover:-translate-x-0.5 transition-transform" />
+          <span>Back to catalog</span>
         </button>
       </div>
 
-      {/* 4. Scrollable Container: Hero Section First (Image Only), then Text Containers Appearing on Scroll */}
+      {/* 4. Scrollable Container: Clean initial screen, then Episode Widget appearing on scroll */}
       <div 
         ref={contentContainerRef}
         onScroll={handleScroll}
         onMouseUp={handleMouseUp}
         className="relative z-10 flex-1 overflow-y-auto h-full px-4 sm:px-8 pb-32"
       >
-        {/* HERO SECTION: Visible when topic is opened - showcases the image only with a subtle cue */}
-        <section className="min-h-screen w-full flex flex-col justify-end items-center pb-20 pt-24 px-4">
-          <div className="flex flex-col items-center text-center max-w-xl mx-auto space-y-3 p-5 sm:p-7 rounded-3xl bg-slate-950/25 backdrop-blur-2xl border border-white/15 shadow-[0_8px_32px_0_rgba(0,0,0,0.4)]">
-            <span className="px-3.5 py-1 rounded-full text-xs font-mono tracking-widest uppercase bg-cyan-950/40 border border-cyan-400/30 text-cyan-300">
-              Episode {currentChapter.episodeNumber} · Celestial Codex
-            </span>
-            <h1 className="text-3xl sm:text-5xl font-light text-white tracking-tight drop-shadow-md">
-              {currentChapter.title}
-            </h1>
-            <p className="text-sm sm:text-base text-cyan-200/90 font-light drop-shadow">
-              {currentChapter.subtitle}
-            </p>
-          </div>
-
-          {/* Animated Scroll Indicator Cue to reveal text containers */}
+        {/* INITIAL VIEWPORT: Completely clean celestial view with small back button and blinking bottom scroll arrow */}
+        <section className="h-screen w-full flex flex-col justify-end items-center pb-8 sm:pb-12 pointer-events-none">
           <button
             onClick={() => {
               if (contentContainerRef.current) {
-                contentContainerRef.current.scrollTo({ top: window.innerHeight * 0.9, behavior: 'smooth' });
+                contentContainerRef.current.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
               }
             }}
-            className="mt-6 flex flex-col items-center gap-1.5 px-5 py-2.5 rounded-full bg-slate-950/30 hover:bg-slate-900/60 backdrop-blur-xl border border-white/20 text-cyan-300 hover:text-white text-xs font-mono transition-all cursor-pointer group shadow-2xl hover:scale-105 active:scale-95"
+            className="pointer-events-auto flex flex-col items-center gap-1.5 p-3 rounded-full hover:bg-slate-950/30 transition-all cursor-pointer group"
+            title="Scroll down to read episode"
+            aria-label="Scroll down to read episode"
           >
-            <span className="tracking-wide">Scroll down to read topic</span>
-            <ChevronDown className="w-4 h-4 text-cyan-400 animate-bounce group-hover:translate-y-0.5 transition-transform" />
+            <div className="flex flex-col items-center animate-pulse">
+              <ChevronDown className="w-8 h-8 text-cyan-400 animate-bounce group-hover:text-cyan-200 transition-transform drop-shadow-[0_0_16px_rgba(34,211,238,0.85)]" />
+            </div>
           </button>
         </section>
 
-        {/* ON SCROLLING: Transparent Glassmorphism Translucent Text Containers */}
+        {/* ON SCROLLING: The Episode Name Widget appears here */}
         <div className="max-w-4xl mx-auto space-y-8 pt-4">
           
-          {/* Episode Header & Overview Text Container (Transparent Glassmorphism) */}
-          <div className="p-6 sm:p-10 rounded-3xl bg-slate-950/30 sm:bg-slate-950/25 backdrop-blur-2xl border border-white/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.45)] space-y-5 transition-all">
+          {/* Episode Name Widget (Glassmorphism Card) */}
+          <div className="p-6 sm:p-10 rounded-3xl bg-slate-950/35 sm:bg-slate-950/30 backdrop-blur-2xl border border-white/20 shadow-[0_12px_40px_0_rgba(0,0,0,0.5)] space-y-5 transition-all">
             <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-cyan-300 tracking-widest uppercase">
-              <span className="px-2.5 py-1 rounded-full bg-cyan-950/40 border border-cyan-400/20">Episode {currentChapter.episodeNumber} · Celestial Codex</span>
+              <span className="px-3 py-1 rounded-full bg-cyan-950/50 border border-cyan-400/30 font-semibold text-cyan-300 shadow-sm">
+                Episode {currentChapter.episodeNumber} · Celestial Codex
+              </span>
               <span className="text-slate-300 font-light">{currentChapter.readTimeMinutes} min read</span>
             </div>
 
-            <h2 className="text-2xl sm:text-4xl font-light text-white tracking-tight leading-tight drop-shadow">
+            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-light text-white tracking-tight leading-tight drop-shadow-md">
               {currentChapter.title}
-            </h2>
+            </h1>
 
             <p className="text-base sm:text-xl text-cyan-100 font-light leading-relaxed drop-shadow-sm">
               {currentChapter.subtitle}
@@ -339,38 +347,70 @@ export const CinematicEbookViewer: React.FC<CinematicEbookViewerProps> = ({
               {currentChapter.summary}
             </div>
 
-            {/* Cross-Link Shortcuts to 3D Visualizers & AstroLens */}
-            {(onOpenAstroLens || (currentChapter.associatedPlanetId && onOpenPlanetStudio) || onOpenStarMap) && (
-              <div className="flex flex-wrap items-center gap-2.5 pt-3 border-t border-white/10">
-                {onOpenAstroLens && (
+            {/* Audio Narration Controls & Visualizer Links */}
+            <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-white/10">
+              <div className="flex items-center gap-2.5">
+                <button
+                  onClick={isSpeaking && !isPaused ? handlePauseNarration : handlePlayNarration}
+                  className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-semibold transition-all shadow-md hover:scale-105 cursor-pointer"
+                  title={isSpeaking && !isPaused ? 'Pause Voice Narration' : 'Listen to Episode Audio'}
+                >
+                  {isSpeaking && !isPaused ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
+                  <span>{isSpeaking ? (isPaused ? 'Resume Narration' : 'Pause Narration') : 'Play Audio Narration'}</span>
+                </button>
+
+                {isSpeaking && (
                   <button
-                    onClick={() => onOpenAstroLens()}
-                    className="inline-flex items-center space-x-1.5 px-3.5 py-2 rounded-xl bg-cyan-950/40 hover:bg-cyan-900/60 border border-cyan-400/40 text-cyan-200 text-xs font-mono backdrop-blur-md transition-colors cursor-pointer"
+                    onClick={handleStopNarration}
+                    title="Stop Narration"
+                    className="p-2 rounded-xl border border-white/15 text-slate-400 hover:text-white transition-colors cursor-pointer"
                   >
-                    <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-                    <span>Inspect in AstroLens Observatory</span>
+                    <RotateCcw className="w-3.5 h-3.5" />
                   </button>
                 )}
-                {currentChapter.associatedPlanetId && onOpenPlanetStudio && (
-                  <button
-                    onClick={() => onOpenPlanetStudio(currentChapter.associatedPlanetId!)}
-                    className="inline-flex items-center space-x-1.5 px-3.5 py-2 rounded-xl bg-slate-900/40 hover:bg-slate-800/60 border border-white/15 text-slate-200 text-xs font-mono backdrop-blur-md transition-colors cursor-pointer"
-                  >
-                    <ExternalLink className="w-3.5 h-3.5 text-cyan-400" />
-                    <span>3D Planet Studio</span>
-                  </button>
-                )}
-                {onOpenStarMap && (
-                  <button
-                    onClick={() => onOpenStarMap({ dsoId: currentChapter.associatedDsoId })}
-                    className="inline-flex items-center space-x-1.5 px-3.5 py-2 rounded-xl bg-slate-900/40 hover:bg-slate-800/60 border border-white/15 text-slate-200 text-xs font-mono backdrop-blur-md transition-colors cursor-pointer"
-                  >
-                    <ExternalLink className="w-3.5 h-3.5 text-amber-400" />
-                    <span>3D Star Map</span>
-                  </button>
-                )}
+
+                <button
+                  onClick={handleCycleRate}
+                  className="px-2 py-1.5 rounded-xl bg-slate-900/60 border border-white/15 text-[11px] font-mono text-cyan-300 hover:bg-slate-800 transition-colors cursor-pointer"
+                  title="Cycle Narration Speed"
+                >
+                  {playbackRate}x
+                </button>
               </div>
-            )}
+
+              {/* Cross-Link Shortcuts to 3D Visualizers & AstroLens */}
+              {(onOpenAstroLens || (currentChapter.associatedPlanetId && onOpenPlanetStudio) || onOpenStarMap) && (
+                <div className="flex flex-wrap items-center gap-2">
+                  {onOpenAstroLens && (
+                    <button
+                      onClick={() => onOpenAstroLens()}
+                      className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-cyan-950/40 hover:bg-cyan-900/60 border border-cyan-400/40 text-cyan-200 text-xs font-mono backdrop-blur-md transition-colors cursor-pointer"
+                    >
+                      <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+                      <span>Observatory</span>
+                    </button>
+                  )}
+                  {currentChapter.associatedPlanetId && onOpenPlanetStudio && (
+                    <button
+                      onClick={() => onOpenPlanetStudio(currentChapter.associatedPlanetId!)}
+                      className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-slate-900/40 hover:bg-slate-800/60 border border-white/15 text-slate-200 text-xs font-mono backdrop-blur-md transition-colors cursor-pointer"
+                    >
+                      <ExternalLink className="w-3.5 h-3.5 text-cyan-400" />
+                      <span>3D Planet</span>
+                    </button>
+                  )}
+                  {onOpenStarMap && (
+                    <button
+                      onClick={() => onOpenStarMap({ dsoId: currentChapter.associatedDsoId })}
+                      className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-slate-900/40 hover:bg-slate-800/60 border border-white/15 text-slate-200 text-xs font-mono backdrop-blur-md transition-colors cursor-pointer"
+                    >
+                      <ExternalLink className="w-3.5 h-3.5 text-amber-400" />
+                      <span>3D Star Map</span>
+                    </button>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Subsequent Narrative Text Containers directly over the image (Transparent Glassmorphism) */}
@@ -389,9 +429,18 @@ export const CinematicEbookViewer: React.FC<CinematicEbookViewerProps> = ({
                   <div className="flex items-center justify-between text-xs font-mono text-cyan-300/90 mb-3">
                     <span className="px-2 py-0.5 rounded bg-white/[0.04] border border-white/10">Part {idx + 1} of {currentChapter.paragraphs.length}</span>
                     {para.annotationTerm && (
-                      <span className="text-[11px] text-amber-300/90 bg-amber-950/30 px-2.5 py-0.5 rounded-full border border-amber-400/20">
-                        Topic: {para.annotationTerm}
-                      </span>
+                      <button
+                        onClick={() => setActiveAnnotation({
+                          term: para.annotationTerm!,
+                          explanation: para.annotationExplanation || 'Astrophysical phenomenon studied in this episode.',
+                          termId: findGlossaryTermId(para.annotationTerm!)
+                        })}
+                        className="group inline-flex items-center gap-1.5 text-[11px] text-amber-300/90 hover:text-amber-200 bg-amber-950/40 hover:bg-amber-900/60 px-2.5 py-0.5 rounded-full border border-amber-400/30 hover:border-amber-400 transition-all cursor-pointer"
+                        title="Click to view definition and jump to glossary"
+                      >
+                        <span>Topic: {para.annotationTerm}</span>
+                        <ExternalLink className="w-2.5 h-2.5 opacity-70 group-hover:opacity-100" />
+                      </button>
                     )}
                   </div>
 
@@ -424,9 +473,10 @@ export const CinematicEbookViewer: React.FC<CinematicEbookViewerProps> = ({
                       <button
                         onClick={() => setActiveAnnotation({
                           term: para.annotationTerm!,
-                          explanation: para.annotationExplanation!
+                          explanation: para.annotationExplanation!,
+                          termId: findGlossaryTermId(para.annotationTerm!)
                         })}
-                        className="inline-flex items-center gap-1.5 text-xs font-mono text-cyan-400 hover:text-cyan-300 transition-colors"
+                        className="inline-flex items-center gap-1.5 text-xs font-mono text-cyan-400 hover:text-cyan-300 transition-colors cursor-pointer"
                       >
                         <HelpCircle className="w-3.5 h-3.5" />
                         <span>Define: {para.annotationTerm}</span>
@@ -445,18 +495,47 @@ export const CinematicEbookViewer: React.FC<CinematicEbookViewerProps> = ({
             })}
           </div>
 
-          {/* Terminology Popup Container */}
+          {/* Terminology Popup Container with Direct to Glossary Transition */}
           {activeAnnotation && (
-            <div className="p-5 rounded-3xl bg-slate-950/40 backdrop-blur-2xl border border-cyan-400/60 shadow-[0_8px_32px_0_rgba(0,0,0,0.5)]">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-mono text-cyan-300 font-semibold uppercase tracking-wider">
-                  {activeAnnotation.term}
-                </span>
-                <button onClick={() => setActiveAnnotation(null)} className="text-xs text-slate-400 hover:text-white px-2 py-1">✕</button>
+            <div className="p-6 rounded-3xl bg-slate-950/80 backdrop-blur-2xl border border-cyan-400/60 shadow-[0_12px_40px_0_rgba(0,0,0,0.6)] animate-in fade-in zoom-in-95 space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+                  <span className="text-xs font-mono text-cyan-300 font-semibold uppercase tracking-wider">
+                    {activeAnnotation.term}
+                  </span>
+                </div>
+                <button 
+                  onClick={() => setActiveAnnotation(null)} 
+                  className="text-xs text-slate-400 hover:text-white px-2 py-1 rounded cursor-pointer"
+                  aria-label="Close glossary popup"
+                >
+                  ✕
+                </button>
               </div>
+              
               <p className="text-sm text-slate-200 font-light leading-relaxed">
                 {activeAnnotation.explanation}
               </p>
+
+              {onOpenGlossary && (
+                <div className="pt-3 border-t border-white/10 flex flex-wrap items-center justify-between gap-2">
+                  <span className="text-[11px] font-mono text-slate-400">
+                    70% Panoramic Cosmic Dossier available
+                  </span>
+                  <button
+                    onClick={() => {
+                      const targetTermId = activeAnnotation.termId || findGlossaryTermId(activeAnnotation.term);
+                      onOpenGlossary(targetTermId, currentChapter.id);
+                    }}
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-semibold text-xs font-mono transition-all cursor-pointer shadow-lg hover:scale-105 active:scale-95"
+                    title="Open full phenomenon view in Glossary"
+                  >
+                    <Sparkles className="w-3.5 h-3.5 text-slate-950" />
+                    <span>View in Glossary →</span>
+                  </button>
+                </div>
+              )}
             </div>
           )}
 
@@ -510,50 +589,37 @@ export const CinematicEbookViewer: React.FC<CinematicEbookViewerProps> = ({
         </div>
       )}
 
-      {/* Discreet Audio Narration Bar at the very bottom */}
-      <div className="fixed bottom-0 left-0 right-0 z-30 flex items-center justify-between gap-4 px-6 py-2.5 bg-[#05070e]/85 backdrop-blur-md border-t border-slate-800/80 shadow-2xl">
-        <div className="flex items-center gap-3">
+      {/* Floating Audio Controller (Only visible when narration is active, so screen stays 100% clean initially) */}
+      {isSpeaking && (
+        <div className="fixed bottom-6 right-6 z-40 flex items-center gap-3 px-3.5 py-2 rounded-full bg-slate-950/85 backdrop-blur-xl border border-cyan-400/40 shadow-2xl animate-in fade-in slide-in-from-bottom-2">
           <button
-            onClick={isSpeaking && !isPaused ? handlePauseNarration : handlePlayNarration}
-            className="w-8 h-8 rounded-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 flex items-center justify-center transition-transform hover:scale-105 shadow-md"
-            title={isSpeaking && !isPaused ? 'Pause Voice Narration' : 'Play Voice Narration'}
+            onClick={isPaused ? handlePlayNarration : handlePauseNarration}
+            className="w-7 h-7 rounded-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 flex items-center justify-center transition-transform hover:scale-105 cursor-pointer shadow-md"
+            title={isPaused ? 'Resume Narration' : 'Pause Narration'}
           >
-            {isSpeaking && !isPaused ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 ml-0.5" />}
+            {isPaused ? <Play className="w-3.5 h-3.5 ml-0.5" /> : <Pause className="w-3.5 h-3.5" />}
           </button>
-
-          {isSpeaking && (
-            <button
-              onClick={handleStopNarration}
-              title="Stop Narration"
-              className="p-1.5 rounded-full border border-slate-800 text-slate-400 hover:text-slate-100 transition-colors"
-            >
-              <RotateCcw className="w-3 h-3" />
-            </button>
-          )}
-
-          <div>
-            <div className="text-xs font-medium text-slate-200 flex items-center gap-2">
-              <span>{isSpeaking ? (isPaused ? 'Narration Paused' : 'Narrating Episode') : 'Audio Narration'}</span>
-              {isSpeaking && !isPaused && (
-                <span className="flex gap-0.5 items-end h-3">
-                  <span className="w-0.5 h-2 bg-cyan-400 animate-pulse"></span>
-                  <span className="w-0.5 h-3 bg-cyan-400 animate-pulse delay-75"></span>
-                  <span className="w-0.5 h-1.5 bg-cyan-400 animate-pulse delay-150"></span>
-                </span>
-              )}
-            </div>
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-mono text-cyan-200">
+              {isPaused ? 'Paused' : 'Narrating'}
+            </span>
+            {!isPaused && (
+              <span className="flex gap-0.5 items-end h-3">
+                <span className="w-0.5 h-2 bg-cyan-400 animate-pulse"></span>
+                <span className="w-0.5 h-3 bg-cyan-400 animate-pulse delay-75"></span>
+                <span className="w-0.5 h-1.5 bg-cyan-400 animate-pulse delay-150"></span>
+              </span>
+            )}
           </div>
-        </div>
-
-        <div className="flex items-center gap-2">
           <button
-            onClick={handleCycleRate}
-            className="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-[11px] font-mono text-cyan-300 hover:bg-slate-800 transition-colors"
+            onClick={handleStopNarration}
+            title="Stop Narration"
+            className="p-1 rounded-full text-slate-400 hover:text-white transition-colors cursor-pointer"
           >
-            {playbackRate}x
+            <RotateCcw className="w-3 h-3" />
           </button>
         </div>
-      </div>
+      )}
 
     </div>
   );

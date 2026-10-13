@@ -2,7 +2,8 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { planetsData } from '../../data/planetsData';
 import { constellationsData, starsData, deepSkyObjectsData } from '../../data/starMapData';
 import { chaptersData } from '../../data/chaptersData';
-import { Search, X, BookOpen, Compass, Sparkles, ArrowRight } from 'lucide-react';
+import { glossaryPhenomena } from '../../data/glossaryData';
+import { Search, X, BookOpen, Compass, Sparkles, ArrowRight, Atom } from 'lucide-react';
 
 import { ASTROLENS_EPISODES } from '../../data/astrolensData';
 import { useDebouncedValue } from '../../hooks/useDebouncedValue';
@@ -10,7 +11,7 @@ import { useDebouncedValue } from '../../hooks/useDebouncedValue';
 interface SearchResult {
   id: string;
   title: string;
-  category: 'planet' | 'constellation' | 'star' | 'dso' | 'chapter' | 'astrolens';
+  category: 'planet' | 'constellation' | 'star' | 'dso' | 'chapter' | 'astrolens' | 'glossary';
   subtitle: string;
   targetId: string;
 }
@@ -22,6 +23,7 @@ interface SearchModalProps {
   onNavigateToChapter: (chapterId: string) => void;
   onNavigateToStarMap: (target?: { constellationId?: string; starId?: string; dsoId?: string }) => void;
   onNavigateToAstroLens?: (episodeId: string) => void;
+  onNavigateToGlossary?: (termId: string) => void;
 }
 
 export const SearchModal: React.FC<SearchModalProps> = ({
@@ -31,6 +33,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
   onNavigateToChapter,
   onNavigateToStarMap,
   onNavigateToAstroLens,
+  onNavigateToGlossary,
 }) => {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<SearchResult[]>([]);
@@ -141,6 +144,24 @@ export const SearchModal: React.FC<SearchModalProps> = ({
       }
     });
 
+    // Cosmic Phenomena Glossary
+    glossaryPhenomena.forEach(p => {
+      if (
+        p.term.toLowerCase().includes(q) ||
+        p.shortDefinition.toLowerCase().includes(q) ||
+        p.category.toLowerCase().includes(q) ||
+        p.mechanismDescription.toLowerCase().includes(q)
+      ) {
+        matches.push({
+          id: p.id,
+          title: `Glossary: ${p.term}`,
+          category: 'glossary',
+          subtitle: `${p.category} · ${p.shortDefinition}`,
+          targetId: p.id,
+        });
+      }
+    });
+
     setResults(matches);
   }, [debouncedQuery]);
 
@@ -205,6 +226,8 @@ export const SearchModal: React.FC<SearchModalProps> = ({
     onClose();
     if (item.category === 'astrolens' && onNavigateToAstroLens) {
       onNavigateToAstroLens(item.targetId);
+    } else if (item.category === 'glossary' && onNavigateToGlossary) {
+      onNavigateToGlossary(item.targetId);
     } else if (item.category === 'chapter') {
       onNavigateToChapter(item.targetId);
     } else if (item.category === 'planet') {
@@ -305,6 +328,8 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                   <div className="w-7 h-7 rounded-lg bg-slate-800 flex items-center justify-center text-slate-300 shrink-0">
                     {item.category === 'chapter' ? (
                       <BookOpen className="w-3.5 h-3.5 text-cyan-400" />
+                    ) : item.category === 'glossary' ? (
+                      <Atom className="w-3.5 h-3.5 text-cyan-400" />
                     ) : item.category === 'planet' ? (
                       <Compass className="w-3.5 h-3.5 text-amber-400" />
                     ) : (

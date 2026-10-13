@@ -60,6 +60,13 @@ export const Footer: React.FC<FooterProps> = ({ setActiveView }) => {
           >
             Star Map
           </button>
+          <span aria-hidden="true" className="text-slate-600">·</span>
+          <button 
+            onClick={() => { setActiveView('glossary'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} 
+            className="hover:text-cyan-300 transition-colors cursor-pointer"
+          >
+            Cosmic Glossary
+          </button>
         </div>
 
         {/* Handwritten 'The Universe is Calling' with celestial typography */}

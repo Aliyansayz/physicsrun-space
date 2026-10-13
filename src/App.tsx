@@ -15,6 +15,7 @@ import { EbookExploreView } from './components/ebook/EbookExploreView';
 import { PlanetViewer3D } from './components/planets/PlanetViewer3D';
 import { StarMap3D } from './components/starmap/StarMap3D';
 import { AstroLensView } from './components/astrolens/AstroLensView';
+import { GlossaryView } from './components/glossary/GlossaryView';
 import { SearchModal } from './components/search/SearchModal';
 import { DetailModal, DetailModalData } from './components/common/DetailModal';
 import { ResponsiveImage } from './components/common/ResponsiveImage';
@@ -30,6 +31,8 @@ export default function App() {
   const [selectedStarId, setSelectedStarId] = useState<string | undefined>(undefined);
   const [selectedDsoId, setSelectedDsoId] = useState<string | undefined>(undefined);
   const [selectedAstroLensEpisodeId, setSelectedAstroLensEpisodeId] = useState<string>('ep-deepfield-smacs');
+  const [selectedGlossaryTermId, setSelectedGlossaryTermId] = useState<string>('gravitational-lensing');
+  const [glossaryReturnChapterId, setGlossaryReturnChapterId] = useState<string | null>(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [detailModalData, setDetailModalData] = useState<DetailModalData | null>(null);
   const [isAmbientPlaying, setIsAmbientPlaying] = useState(false);
@@ -82,6 +85,27 @@ export default function App() {
   const handleNavigateToAstroLens = (episodeId?: string) => {
     if (episodeId) setSelectedAstroLensEpisodeId(episodeId);
     setActiveView('astrolens');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Navigate to Cosmic Phenomena Glossary
+  const handleNavigateToGlossary = (termId?: string, fromChapterId?: string) => {
+    if (termId) setSelectedGlossaryTermId(termId);
+    if (fromChapterId) {
+      setGlossaryReturnChapterId(fromChapterId);
+    } else {
+      setGlossaryReturnChapterId(null);
+    }
+    setActiveView('glossary');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Return to chapter reading from glossary
+  const handleReturnToChapterFromGlossary = (chapterId: string) => {
+    setSelectedChapterId(chapterId);
+    setActiveView('ebook');
+    setEbookSubMode('reader');
+    setGlossaryReturnChapterId(null);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -188,9 +212,24 @@ export default function App() {
                   onOpenPlanetStudio={handleNavigateToPlanet}
                   onOpenStarMap={handleNavigateToStarMap}
                   onOpenAstroLens={handleNavigateToAstroLens}
+                  onOpenGlossary={handleNavigateToGlossary}
                 />
               </div>
             )}
+          </div>
+        )}
+
+        {activeView === 'glossary' && (
+          <div className="w-full h-full animate-in fade-in duration-300">
+            <GlossaryView
+              initialTermId={selectedGlossaryTermId}
+              returnChapterId={glossaryReturnChapterId}
+              onReturnToChapter={handleReturnToChapterFromGlossary}
+              onNavigateToChapter={handleNavigateToChapter}
+              onNavigateToPlanet={handleNavigateToPlanet}
+              onNavigateToStarMap={handleNavigateToStarMap}
+              onNavigateToAstroLens={handleNavigateToAstroLens}
+            />
           </div>
         )}
 
@@ -216,8 +255,10 @@ export default function App() {
         )}
       </main>
 
-      {/* Footer */}
-      <Footer setActiveView={handleSwitchView} />
+      {/* Footer (hidden in full-screen episode reader and glossary console modes) */}
+      {!( (activeView === 'ebook' && ebookSubMode === 'reader') || activeView === 'glossary' ) && (
+        <Footer setActiveView={handleSwitchView} />
+      )}
 
       {/* Global Astronomical Search Modal */}
       <SearchModal
@@ -227,6 +268,7 @@ export default function App() {
         onNavigateToChapter={handleNavigateToChapter}
         onNavigateToStarMap={handleNavigateToStarMap}
         onNavigateToAstroLens={handleNavigateToAstroLens}
+        onNavigateToGlossary={handleNavigateToGlossary}
       />
 
       {/* Detail Inspect Modal */}

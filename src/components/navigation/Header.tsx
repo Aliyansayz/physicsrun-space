@@ -180,6 +180,18 @@ export const Header: React.FC<HeaderProps> = ({
             Star Map
           </button>
 
+          <button 
+            onClick={() => { 
+              setActiveView('glossary'); 
+              window.scrollTo({ top: 0, behavior: 'smooth' }); 
+            }}
+            className={`transition-colors cursor-pointer py-1 ${
+              activeView === 'glossary' ? 'text-cyan-300 font-medium' : 'text-slate-300 hover:text-white'
+            }`}
+          >
+            Glossary
+          </button>
+
           {/* Sound Toggle */}
           <button
             onClick={handleToggleAmbient}
@@ -270,6 +282,18 @@ export const Header: React.FC<HeaderProps> = ({
           >
             <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
             <span>AstroLens Observatory</span>
+          </button>
+          <button
+            onClick={() => { 
+              setActiveView('glossary'); 
+              setMobileMenuOpen(false); 
+              window.scrollTo({ top: 0, behavior: 'smooth' }); 
+            }}
+            className={`block text-left w-full text-sm py-1.5 ${
+              activeView === 'glossary' ? 'text-cyan-300 font-semibold' : 'text-slate-300 hover:text-white'
+            }`}
+          >
+            Cosmic Phenomena Glossary
           </button>
           <div className="pt-2 border-t border-slate-900 flex flex-col gap-2">
             <button

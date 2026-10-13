@@ -1,4 +1,4 @@
-﻿import { ChapterData } from '../types';
+import { ChapterData } from '../types';
 import { cosmicImages } from '../assets/images';
 
 export const chaptersData: ChapterData[] = [
@@ -24,22 +24,42 @@ export const chaptersData: ChapterData[] = [
         callout: 'Every atom of iron in your bloodstream was cooked inside the core of a dying star before coalescing in Earth’s mantle.',
         annotationTerm: 'Molecular Cloud',
         annotationExplanation: 'A dense interstellar cloud of gas and dust rich in hydrogen and helium, within which gravity triggers the birth of new protostars and planetary disks.',
+        analogy: {
+          concept: 'Solar Nebula Collapse',
+          simpleExplanation: 'A colossal cloud of cold space gas collapsed under its own weight and began spinning faster and faster, flattening into a wide pizza-dough disk that formed our Sun and planets.',
+          realWorldAnalogy: 'Think of a spinning ice skater pulling in their outstretched arms: as gravity pulls the spread-out gas into a tight center, the spin accelerates violently, flattening everything into a neat planetary disc.',
+        },
       },
       {
         id: 'p1-2',
         text: 'Nearest the blazing furnace of our G-type yellow dwarf sun, the terrestrial planets tell four diverging tales of planetary evolution. Mercury, stripped of its silicate mantle by ancient impact cataclysms, is an iron core encased in lunar regolith. Venus, having suffered a catastrophic runaway greenhouse cycle, presents a crushing sulfurous hellscape where lead melts in the open air.',
         annotationTerm: 'Runaway Greenhouse',
         annotationExplanation: 'A positive feedback loop where positive surface heating vaporizes water, trapping more infrared radiation until the entire ocean inventory is lost to space.',
+        analogy: {
+          concept: 'The Frost Line & Two Types of Worlds',
+          simpleExplanation: 'Close to the furnace of the Sun, it was far too hot for ice to exist, so only hardy rocks and metals could stick together. Farther out in the cold shadows, freezing ice snowballs could balloon into giant gas titans.',
+          realWorldAnalogy: 'Imagine standing near a raging campfire: your chocolate bar melts if you stand close, but an ice cream cone stays frozen solid if you take ten steps back into the chilly night.',
+        },
       },
       {
         id: 'p1-3',
         text: 'Then shines Earth: a dynamic geochemical machine where plate tectonics recycle carbon, a liquid outer core sustains a planetary geomagnetic shield, and vast hydrospheric reservoirs cradled self-replicating molecular life. Beside her orbits the Moon, a celestial stabilizer whose tidal friction steadies Earth’s axial tilt and keeps our climate within temperate boundaries.',
+        analogy: {
+          concept: 'Earth’s Magnetic Shield & Moon Stabilizer',
+          simpleExplanation: 'Earth’s molten churning iron core acts like a colossal dynamo generating an invisible forcefield, while the Moon acts as a cosmic gravitational counterweight.',
+          realWorldAnalogy: 'Earth’s magnetic field is like a cosmic umbrella deflecting the scorching rain of solar wind, while the Moon is like a tightrope walker’s balance pole keeping Earth from wobbling out of control.',
+        },
       },
       {
         id: 'p1-4',
         text: 'Past the jagged rubble of the asteroid belt rises Jupiter, a colossal planetary monarch exerting gravitational dominion over the entire inner system. Its interior harbors liquid metallic hydrogen under pressures exceeding forty million atmospheres, spinning a colossal magnetic bubble larger than the full Moon in our night sky.',
         annotationTerm: 'Metallic Hydrogen',
         annotationExplanation: 'A degenerate phase of matter where hydrogen is compressed so intensely that electron shells break down, causing the fluid to conduct electricity like a liquid metal.',
+        analogy: {
+          concept: 'Jupiter the Cosmic Vacuum Cleaner',
+          simpleExplanation: 'Jupiter has more mass than all other planets combined. Its massive gravity sweeps up and captures or ejects wandering asteroids that could otherwise collide with Earth.',
+          realWorldAnalogy: 'Jupiter is like a giant heavyweight bouncer standing at the door of the inner solar system, deflecting rogue space rocks before they can reach our fragile home.',
+        },
       },
       {
         id: 'p1-5',
@@ -86,6 +106,11 @@ export const chaptersData: ChapterData[] = [
         text: 'When a passing shockwave from a nearby supernova compresses a pocket of gas beyond its critical Jeans Mass, the pocket begins an irreversible collapse. As potential energy transforms into kinetic heat, the core compresses into an opaque protostar, draped in a spinning circumstellar accretion disk from which planets will eventually condense.',
         annotationTerm: 'Circumstellar Disk',
         annotationExplanation: 'A torus of gas and dust rotating around a young star, where electrostatic adhesion and gravitational clumping forge planetesimals.',
+        analogy: {
+          concept: 'Supernova Shockwaves & Star Ignition',
+          simpleExplanation: 'Space gas is usually too spread out to collapse on its own. It needs a sudden push, like a passing explosion, to pack the gas tightly enough for gravity to grab hold.',
+          realWorldAnalogy: 'Think of knocking over the first domino: a distant dying star explodes, sending a ripple across space that shoves loose gas into a tight clump, triggering the birth of a brand new star.',
+        },
       },
       {
         id: 'p2-3',
@@ -94,6 +119,11 @@ export const chaptersData: ChapterData[] = [
       {
         id: 'p2-4',
         text: 'The newborn star achieves hydrostatic equilibrium: the inward crushing pull of gravity is precisely balanced by the outward radiation pressure of thermonuclear fusion. It takes tens of thousands of years for each photon generated in the stellar core to diffuse to the surface and escape into the cosmos as starlight.',
+        analogy: {
+          concept: 'Hydrostatic Equilibrium (Stellar Balance)',
+          simpleExplanation: 'A star is in an eternal tug-of-war: gravity tries to crush it down, but the nuclear explosion in its belly pushes back with equal force.',
+          realWorldAnalogy: 'Imagine blowing air into a flexible rubber balloon while holding it tightly with both hands: as long as your breath pressure matches your hand grip, the balloon remains perfectly steady and round.',
+        },
       },
     ],
     audioTranscript: 'Episode Two: Stellar Nurseries. In the immense dark chasms of nebulae like Orion and Carina, silence gives birth to light. Watch as trillions of tons of cold hydrogen succumb to gravity, heating until quantum tunneling triggers thermonuclear fusion.',
@@ -130,12 +160,22 @@ export const chaptersData: ChapterData[] = [
       {
         id: 'p3-2',
         text: 'The iconic spiral arms are dynamic density waves. As interstellar gas clouds pass through these gravitational crests, they compress and illuminate the arms with clusters of luminous blue stars and pink emission nebulae. Our Solar System currently sails through the Orion-Cygnus Arm spur, roughly twenty-seven thousand light-years from the galactic core.',
+        analogy: {
+          concept: 'Spiral Arms as Cosmic Traffic Jams',
+          simpleExplanation: 'Spiral arms are not rigid windmill blades made of permanent stars. They are traveling sound-like ripples of high traffic where stars temporarily slow down, bunch together, and then move on.',
+          realWorldAnalogy: 'Think of cars on a highway approaching road work: cars slow down and cluster tightly together inside the slow zone, then speed up again after passing it. The traffic jam stays in the same place even though individual cars flow right through it.',
+        },
       },
       {
         id: 'p3-3',
         text: 'Yet the visible stars and luminous nebulae account for only fifteen percent of the galaxy’s gravitational mass. When Vera Rubin measured the orbital speeds of outer stars, they were moving just as swiftly as inner stars—defying Keplerian physics unless an invisible halo of Dark Matter enveloped the entire structure.',
         annotationTerm: 'Dark Matter Halo',
         annotationExplanation: 'A hypothetical spheroidal halo of non-baryonic matter extending far beyond the visible galactic disk that prevents spiral galaxies from flying apart under rapid rotation.',
+        analogy: {
+          concept: 'Dark Matter as an Invisible Gravitational Cage',
+          simpleExplanation: 'Without an invisible heavy scaffolding holding the galaxy together, the outer stars would spin so fast that the entire galaxy would fling itself apart into the void.',
+          realWorldAnalogy: 'Like spinning a wet tennis ball: water drops immediately fly off the surface in all directions. Dark matter is like an invisible magnetic cage wrapping around the ball so the water droplets are forced to stay in orbit.',
+        },
       },
     ],
     audioTranscript: 'Episode Three: The Barred Spiral. Step back into deep intergalactic space to behold our galaxy in full splendor. Over one hundred billion stars wheeling together along majestic spiral density waves, anchored in place by an invisible ocean of dark matter.',
@@ -168,16 +208,31 @@ export const chaptersData: ChapterData[] = [
         callout: 'At the event horizon of a black hole, the roles of space and time invert: moving forward in time becomes synonymous with moving deeper toward the singularity.',
         annotationTerm: 'Event Horizon',
         annotationExplanation: 'The mathematical boundary of a black hole beyond which the escape velocity equals or exceeds the speed of light, preventing any information or matter from escaping.',
+        analogy: {
+          concept: 'The Event Horizon as a Cosmic Waterfall',
+          simpleExplanation: 'The event horizon is not a physical wall or surface. It is the invisible boundary line where gravity pulls space inward faster than light can swim outward.',
+          realWorldAnalogy: 'Imagine paddling a kayak in a river toward a towering waterfall. Upstream, you can turn around and paddle back. But past the point of no return, the water rushes faster than the top speed of your kayak. The event horizon is that exact point of no return.',
+        },
       },
       {
         id: 'p4-2',
         text: 'Surrounding the event horizon is the accretion disk: superheated plasma swirling at relativistic fractions of light speed, heated by extreme frictional shear to millions of degrees. The intense gravitational field bends passing light rays around the horizon in an effect known as gravitational lensing, producing the signature double-humped silhouette captured by the Event Horizon Telescope.',
         annotationTerm: 'Gravitational Lensing',
         annotationExplanation: 'The deflection of light around a massive gravitational body predicted by Einstein’s General Relativity, bending straight light rays into arcs and rings.',
+        analogy: {
+          concept: 'Gravitational Lensing & Accretion Glow',
+          simpleExplanation: 'Because the black hole bends spacetime like a thick magnifying glass, you can actually see the glowing matter behind the black hole curved right over its top and bottom.',
+          realWorldAnalogy: 'Like looking through the curved base of a crystal wine glass: straight lines warp into shimmering rings and arcs around the dark center.',
+        },
       },
       {
         id: 'p4-3',
         text: 'According to General Relativity, time is not absolute. To an outside observer watching an astronaut fall toward a black hole, the falling traveler appears to slow down, redshift into infrared invisibility, and freeze forever at the horizon. Yet from the traveler’s perspective, they cross the horizon smoothly in finite proper time—facing tidal spaghettification as gravitational gradients tear atomic bonds apart.',
+        analogy: {
+          concept: 'Gravitational Time Dilation',
+          simpleExplanation: 'The closer you get to immense gravity, the slower your personal clock ticks compared to the rest of the universe.',
+          realWorldAnalogy: 'Think of watching a movie on a slow-motion video player: from the outside spectator’s view, the falling astronaut freezes frame by frame forever, while for the astronaut, their own watch continues ticking normally.',
+        },
       },
     ],
     audioTranscript: 'Episode Four: Gravitational Singularities. You stand before the ultimate boundary of our universe. A black hole is not an object made of matter, but pure, extreme curvature of spacetime itself, where the laws of conventional physics break down.',

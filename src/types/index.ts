@@ -110,4 +110,29 @@ export interface ChapterData {
   }[];
 }
 
-export type ActiveView = 'landing' | 'ebook' | 'planets' | 'starmap' | 'astrolens';
+export interface GlossaryPhenomenon {
+  id: string;
+  term: string;
+  pronunciation?: string;
+  category: 'Gravitational Singularities' | 'Stellar Evolution' | 'Intergalactic Dynamics' | 'Plasma & Planetary Magnetism' | 'Cosmological Structures';
+  shortDefinition: string;
+  mechanismDescription: string;
+  physicalLawOrEquation: {
+    name: string;
+    formula: string;
+    explanation: string;
+  };
+  observedExamples: {
+    name: string;
+    coordinates?: string;
+    distance?: string;
+    note: string;
+  }[];
+  imageKey: import('../assets/images').CosmicImageKey;
+  scaleEstimate: string;
+  associatedChapterId?: string;
+  relatedDsoId?: string;
+  relatedPlanetId?: string;
+}
+
+export type ActiveView = 'landing' | 'ebook' | 'planets' | 'starmap' | 'astrolens' | 'glossary';
