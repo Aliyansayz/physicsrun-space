@@ -49,7 +49,7 @@ export const LandingHero: React.FC<LandingHeroProps> = React.memo(({
             className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full border border-cyan-500/25 bg-cyan-950/35 backdrop-blur-md mb-5 text-[11px] font-mono tracking-[0.2em] text-cyan-300 uppercase shadow-lg shadow-cyan-950/30 select-none"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-            <span>Cinematic Novel • Parallax Edition</span>
+            <span>Astrophotography Atlas • Deep Sky Observatory</span>
           </motion.div>
 
           {/* Heading: The Universe is Calling - Refined Novel Font & Reduced Size */}
@@ -61,7 +61,7 @@ export const LandingHero: React.FC<LandingHeroProps> = React.memo(({
           >
             The Universe <br />
             <span className="font-cinzel font-semibold text-3xl sm:text-4xl md:text-5xl text-transparent bg-clip-text bg-gradient-to-r from-cyan-200 via-sky-300 to-teal-200 inline-block drop-shadow-[0_0_24px_rgba(56,189,248,0.45)] tracking-widest">
-              Is Calling
+              Through the Lens
             </span>
           </motion.h1>
 
@@ -72,7 +72,7 @@ export const LandingHero: React.FC<LandingHeroProps> = React.memo(({
             transition={{ duration: 0.7, delay: 0.2, ease: 'easeOut' }}
             className="text-slate-300 text-sm sm:text-base md:text-lg max-w-xl font-light leading-relaxed mb-8 select-none"
           >
-            An epic journey through <span className="text-cyan-300 font-normal">galaxies</span>, <span className="text-sky-300 font-normal">planets</span>, <span className="text-teal-300 font-normal">stellar nurseries</span>, and the edge of space and time. Experience the narrative with an <span className="text-white font-normal border-b border-cyan-400/40 pb-0.5">immersive dark-mode reader</span>.
+            Deep-sky astrophotography, precision <span className="text-cyan-300 font-normal">narrowband spectroscopy</span>, and interactive <span className="text-sky-300 font-normal">celestial mechanics</span>. Peer through long-exposure sensor stacks with an <span className="text-white font-normal border-b border-cyan-400/40 pb-0.5">astrophotographer's console</span>.
           </motion.p>
 
           {/* Action CTAs */}
@@ -107,8 +107,55 @@ export const LandingHero: React.FC<LandingHeroProps> = React.memo(({
           </motion.div>
         </motion.div>
 
-        {/* Right side spacer */}
-        <div className="hidden lg:block lg:col-span-4 xl:col-span-5 pointer-events-none" />
+        {/* Right side: Astrophotography Rig & Session Telemetry HUD */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="hidden lg:block lg:col-span-4 xl:col-span-5 pointer-events-auto"
+        >
+          <div className="p-6 rounded-3xl bg-slate-950/60 backdrop-blur-2xl border border-white/15 shadow-2xl space-y-4 text-xs font-mono">
+            <div className="flex items-center justify-between border-b border-white/10 pb-3">
+              <div className="flex items-center gap-2 text-cyan-400 font-semibold uppercase tracking-wider">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span>Live Observatory Rig</span>
+              </div>
+              <span className="text-[10px] text-slate-500">SESSION #AP-2026</span>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3 text-[11px]">
+              <div>
+                <div className="text-slate-500 text-[10px]">PRIMARY OPTICS</div>
+                <div className="text-slate-200 font-medium">Askar 107PHQ f/7 APO</div>
+              </div>
+              <div>
+                <div className="text-slate-500 text-[10px]">FOCAL LENGTH</div>
+                <div className="text-slate-200 font-medium">749mm (f/7.0)</div>
+              </div>
+              <div>
+                <div className="text-slate-500 text-[10px]">SENSOR TEMP</div>
+                <div className="text-cyan-300 font-medium">-15.0°C Cooled CMOS</div>
+              </div>
+              <div>
+                <div className="text-slate-500 text-[10px]">FILTER STACK</div>
+                <div className="text-emerald-300 font-medium">3nm SHO Narrowband</div>
+              </div>
+              <div>
+                <div className="text-slate-500 text-[10px]">INTEGRATION</div>
+                <div className="text-slate-200 font-medium">54x 300s (4.5h)</div>
+              </div>
+              <div>
+                <div className="text-slate-500 text-[10px]">GUIDING ACCURACY</div>
+                <div className="text-amber-300 font-medium">0.24″ RMS Multi-Star</div>
+              </div>
+            </div>
+
+            <div className="pt-2 border-t border-white/10 flex items-center justify-between text-[10px] text-slate-400">
+              <span>SKY: Bortle 1 (Atacama Desert)</span>
+              <span>MOON: 4% Waxing</span>
+            </div>
+          </div>
+        </motion.div>
       </div>
 
       {/* Scroll to Explore Indicator */}

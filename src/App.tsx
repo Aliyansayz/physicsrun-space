@@ -36,6 +36,7 @@ export default function App() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [detailModalData, setDetailModalData] = useState<DetailModalData | null>(null);
   const [isAmbientPlaying, setIsAmbientPlaying] = useState(false);
+  const [isRedLightMode, setIsRedLightMode] = useState(false);
 
   // Global keyboard shortcuts (Cmd+K for search, L for AstroLens)
   React.useEffect(() => {
@@ -119,7 +120,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#05070e] text-slate-200 flex flex-col selection:bg-cyan-900/50 selection:text-cyan-200 font-sans relative">
+    <div className={`min-h-screen bg-[#05070e] text-slate-200 flex flex-col selection:bg-cyan-900/50 selection:text-cyan-200 font-sans relative transition-all duration-500 ${isRedLightMode ? 'astro-red-mode' : ''}`}>
       
       {/* Global Space Galactic Supernova Background Layer (visible through translucent glass cards) */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
@@ -147,6 +148,8 @@ export default function App() {
             onOpenSearch={() => setIsSearchOpen(true)}
             isAmbientPlaying={isAmbientPlaying}
             setIsAmbientPlaying={setIsAmbientPlaying}
+            isRedLightMode={isRedLightMode}
+            setIsRedLightMode={setIsRedLightMode}
           />
         </div>
       )}

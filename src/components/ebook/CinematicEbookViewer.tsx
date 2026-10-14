@@ -13,7 +13,10 @@ import {
   ExternalLink,
   Sparkles,
   Highlighter,
-  ArrowLeft
+  ArrowLeft,
+  Camera,
+  Crosshair,
+  Quote
 } from 'lucide-react';
 
 interface CinematicEbookViewerProps {
@@ -81,6 +84,9 @@ export const CinematicEbookViewer: React.FC<CinematicEbookViewerProps> = ({
 
   // Active Term Annotation Card with glossary linkage
   const [activeAnnotation, setActiveAnnotation] = useState<{ term: string; explanation: string; termId?: string } | null>(null);
+
+  // Astrophotography Reticle HUD state
+  const [isReticleActive, setIsReticleActive] = useState(false);
 
   // Helper to map term names to glossary IDs
   const findGlossaryTermId = (termName: string): string => {
@@ -276,6 +282,26 @@ export const CinematicEbookViewer: React.FC<CinematicEbookViewerProps> = ({
         />
         {/* Soft atmospheric gradient allowing full visual picture clarity at the top & subtle text readability */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#05070e]/90 via-[#05070e]/15 to-[#05070e]/30 pointer-events-none" />
+
+        {/* Astrophotography Crosshair and FOV Frame Overlay */}
+        {isReticleActive && (
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10 opacity-60 animate-in fade-in duration-300">
+            <div className="w-[85%] h-[75%] border border-cyan-400/30 rounded-lg relative flex items-center justify-center">
+              <span className="absolute top-3 left-3 text-[10px] font-mono text-cyan-400 uppercase tracking-wider">
+                Full-Frame 35mm · {currentChapter.opticalTelemetry?.focalLength || '850mm f/5.6'}
+              </span>
+              <span className="absolute top-3 right-3 text-[10px] font-mono text-cyan-400 uppercase tracking-wider">
+                N ↑ · E ←
+              </span>
+              <span className="absolute bottom-3 right-3 text-[10px] font-mono text-cyan-400 uppercase tracking-wider">
+                {currentChapter.opticalTelemetry?.bortleClass || 'Bortle 1 (Atacama)'}
+              </span>
+              <div className="w-56 h-56 border border-cyan-400/25 rounded-full flex items-center justify-center">
+                <div className="w-2 h-2 bg-cyan-400 rounded-full shadow-[0_0_8px_rgba(34,211,238,0.9)]" />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* 2. Top Edge Reading Progress Line */}
@@ -298,7 +324,23 @@ export const CinematicEbookViewer: React.FC<CinematicEbookViewerProps> = ({
         </button>
       </div>
 
-      {/* 4. Scrollable Container: Clean initial screen, then Episode Widget appearing on scroll */}
+      {/* 4. Top Right: Astrophotography Reticle Toggle Button */}
+      <div className="fixed top-3.5 right-3.5 sm:top-5 sm:right-6 z-40">
+        <button
+          onClick={() => setIsReticleActive(!isReticleActive)}
+          className={`group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-mono shadow-lg backdrop-blur-xl transition-all cursor-pointer ${
+            isReticleActive
+              ? 'bg-cyan-950/80 border-cyan-400 text-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.3)]'
+              : 'bg-slate-950/50 hover:bg-slate-900/80 border-white/15 text-slate-400 hover:text-white'
+          }`}
+          title="Toggle Astrophotography Frame Reticle"
+        >
+          <Crosshair className="w-3.5 h-3.5" />
+          <span className="hidden sm:inline">Astro Reticle</span>
+        </button>
+      </div>
+
+      {/* 5. Scrollable Container: Clean initial screen, then Episode Widget appearing on scroll */}
       <div 
         ref={contentContainerRef}
         onScroll={handleScroll}
@@ -346,6 +388,27 @@ export const CinematicEbookViewer: React.FC<CinematicEbookViewerProps> = ({
             <div className="p-4 sm:p-5 rounded-2xl bg-white/[0.04] backdrop-blur-xl border border-white/10 text-sm sm:text-base text-slate-100 font-light leading-relaxed shadow-inner">
               {currentChapter.summary}
             </div>
+
+            {/* Astrophotography Observational Prompt Inscription */}
+            {currentChapter.episodicPrompt && (
+              <div className="p-4 sm:p-5 rounded-2xl bg-cyan-950/25 border border-cyan-500/25 space-y-2.5">
+                <div className="flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-wider text-cyan-400">
+                  <Quote className="w-3 h-3 text-cyan-400" />
+                  <span>Astrophotography Field Directive</span>
+                </div>
+                <p className="text-xs sm:text-sm text-cyan-100 font-light italic leading-relaxed">
+                  "{currentChapter.episodicPrompt}"
+                </p>
+                {currentChapter.opticalTelemetry && (
+                  <div className="pt-2 border-t border-cyan-500/20 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] font-mono text-slate-300">
+                    <span className="text-slate-400">Optics: <span className="text-white">{currentChapter.opticalTelemetry.telescope}</span></span>
+                    <span className="text-slate-400">Stack: <span className="text-cyan-300">{currentChapter.opticalTelemetry.integrationTime}</span></span>
+                    <span className="text-slate-400">Filters: <span className="text-emerald-300">{currentChapter.opticalTelemetry.filters}</span></span>
+                    <span className="text-slate-400">Sky: <span className="text-amber-300">{currentChapter.opticalTelemetry.bortleClass}</span></span>
+                  </div>
+                )}
+              </div>
+            )}
 
             {/* Audio Narration Controls & Visualizer Links */}
             <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-white/10">

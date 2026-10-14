@@ -85,6 +85,20 @@ export interface ChapterParagraph {
   callout?: string;
   annotationTerm?: string;
   annotationExplanation?: string;
+  analogy?: {
+    concept: string;
+    simpleExplanation: string;
+    realWorldAnalogy: string;
+  };
+}
+
+export interface BookmarkItem {
+  id: string;
+  chapterId: string;
+  chapterTitle: string;
+  paragraphId: string;
+  excerpt: string;
+  timestamp: number;
 }
 
 export interface ChapterData {
@@ -97,6 +111,17 @@ export interface ChapterData {
   heroImage: string;
   associatedPlanetId?: string;
   associatedDsoId?: string;
+  episodicPrompt?: string;
+  opticalTelemetry?: {
+    telescope: string;
+    filters: string;
+    integrationTime: string;
+    bortleClass: string;
+    focalLength: string;
+    fieldOfView: string;
+    sensorTemp?: string;
+    snrDb?: number;
+  };
   paragraphs: ChapterParagraph[];
   audioTranscript: string;
   keyMetrics: {
@@ -115,6 +140,8 @@ export interface GlossaryPhenomenon {
   term: string;
   pronunciation?: string;
   category: 'Gravitational Singularities' | 'Stellar Evolution' | 'Intergalactic Dynamics' | 'Plasma & Planetary Magnetism' | 'Cosmological Structures';
+  episodicPrompt: string;
+  episodeReference?: string;
   shortDefinition: string;
   mechanismDescription: string;
   physicalLawOrEquation: {
@@ -133,6 +160,17 @@ export interface GlossaryPhenomenon {
   associatedChapterId?: string;
   relatedDsoId?: string;
   relatedPlanetId?: string;
+  astrophotographyMeta?: {
+    telescope: string;
+    focalLength: string;
+    fRatio: string;
+    filters: string;
+    exposureStack: string;
+    sensorTemp: string;
+    bortleScale: string;
+    guidingRms: string;
+  };
+  astrophotographyDirectives?: string;
 }
 
 export type ActiveView = 'landing' | 'ebook' | 'planets' | 'starmap' | 'astrolens' | 'glossary';

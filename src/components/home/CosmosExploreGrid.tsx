@@ -32,6 +32,7 @@ export interface ObservatoryTopicItem {
   shortDesc: string;
   image: PictureData;
   metrics: string;
+  astroExposure?: string;
   onAction: () => void;
   actionText: string;
   secondaryAction: () => void;
@@ -85,9 +86,16 @@ const ObservatoryParallaxCard: React.FC<ObservatoryParallaxCardProps> = ({
           {topic.badge}
         </div>
 
+        {/* Astrophotography Optical Rig Chip */}
+        {topic.astroExposure && (
+          <div className="absolute bottom-2.5 right-2.5 flex items-center gap-1 backdrop-blur-md bg-black/80 px-2 py-0.5 rounded text-[9px] font-mono tracking-wider text-slate-300 border border-white/15 shadow-sm">
+            <span>📷 {topic.astroExposure}</span>
+          </div>
+        )}
+
         {/* Inspect Overlay Trigger */}
         <div
-          className="absolute inset-0 bg-gradient-to-t from-black/85 via-cyan-950/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"
+          className="absolute inset-0 bg-gradient-to-t from-black/85 via-cyan-950/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
         />
       </div>
 
@@ -158,6 +166,7 @@ export const CosmosExploreGrid: React.FC<CosmosExploreGridProps> = ({
       shortDesc: "A colossal cosmic megastructure forged from the collision of four galaxy clusters. Its monumental gravity bends space into luminous Einstein arcs, magnifying the earliest infant galaxies from cosmic dawn.",
       image: clusterDeepField,
       metrics: '3.98 Billion Ly • 10¹⁵ M☉ • Redshift z=0.308',
+      astroExposure: 'JWST NIRCam · 42h Integration Stack',
       onAction: () => onNavigateToChapter('episode-08'),
       actionText: 'Read Episode 08: Galaxy Clusters & Gravitational Lenses',
       secondaryAction: () => onNavigateToStarMap({ dsoId: 'abell_2744' }),
@@ -173,6 +182,7 @@ export const CosmosExploreGrid: React.FC<CosmosExploreGridProps> = ({
       shortDesc: "The catastrophic detonation of an iron-exhausted massive star. Blasting outward at 30,000 km/s, its relativistic shockwave forges and distributes the universe's gold, platinum, and iodine across space.",
       image: supernovaCosmic,
       metrics: '10⁴⁴ Joules • 100B Kelvin • 30,000 km/s Blast',
+      astroExposure: 'TOA-150B APO · 64x 300s · 3nm SHO',
       onAction: () => onNavigateToChapter('episode-07'),
       actionText: 'Read Episode 07: The Supernova Crucible',
       secondaryAction: () => onNavigateToStarMap({ dsoId: 'sn_1987a' }),
@@ -188,6 +198,7 @@ export const CosmosExploreGrid: React.FC<CosmosExploreGridProps> = ({
       shortDesc: "Two massive clusters smashed through each other at 4,500 km/s. Supersonic shock fronts dragged ordinary gas behind, while collisionless dark matter ghosted straight through without friction.",
       image: clusterCollision,
       metrics: '3.7 Billion Ly • Mach 3 Bow Shock • Dark Matter Core',
+      astroExposure: 'Chandra ACIS + Magellan 6.5m · 500ks',
       onAction: () => onNavigateToChapter('episode-09'),
       actionText: 'Read Episode 09: Cosmic Collisions & Bullet Cluster',
       secondaryAction: () => onNavigateToStarMap({ dsoId: 'bullet_cluster' }),
@@ -203,6 +214,7 @@ export const CosmosExploreGrid: React.FC<CosmosExploreGridProps> = ({
       shortDesc: "Intricate gossamer filigree of ionized oxygen and hydrogen expanding from a core collapse. At the heart spins a dense neutron star rotating 30.2 times a second, whipping synchrotron magnetic rings into space.",
       image: supernovaVeil,
       metrics: '6,500 Ly • 30.2 Hz Spin • 10 Light-Year Shroud',
+      astroExposure: 'FRA600 Petzval · 48x 360s · OIII/Ha',
       onAction: () => onNavigateToStarMap({ dsoId: 'm1' }),
       actionText: 'Inspect in 3D Star Map',
       secondaryAction: () => onNavigateToChapter('episode-07'),
@@ -218,6 +230,7 @@ export const CosmosExploreGrid: React.FC<CosmosExploreGridProps> = ({
       shortDesc: "Our home galaxy spanning 100,000 light-years, harboring over 100 billion stars. Dynamic density waves compress star-forming clouds along the Perseus and Sagittarius arms around Sagittarius A*.",
       image: spiralGalaxyCore,
       metrics: '100,000 Ly Across • 400B Stars • 230 km/s Orbit',
+      astroExposure: 'Sharpstar 150HNT · 72x 180s · Bortle 1',
       onAction: () => onNavigateToChapter('episode-03'),
       actionText: 'Read Episode 03: The Barred Spiral',
       secondaryAction: () => onNavigateToStarMap({ dsoId: 'm31' }),
@@ -233,6 +246,7 @@ export const CosmosExploreGrid: React.FC<CosmosExploreGridProps> = ({
       shortDesc: "Where spacetime curvature becomes extreme and escape velocity exceeds light speed. Superheated accretion plasma whirls at relativistic speeds, gravitationally warped into luminous photon rings.",
       image: supermassiveBlackHole,
       metrics: '4.15M Solar Masses • 12M km Horizon • Relativistic Jet',
+      astroExposure: 'Planewave CDK17 · 48x 300s · NIR Filter',
       onAction: () => onNavigateToChapter('episode-04'),
       actionText: 'Read Episode 04: Singularities',
       secondaryAction: () => onNavigateToStarMap({ dsoId: 'sagittarius_a_star' }),
@@ -248,6 +262,7 @@ export const CosmosExploreGrid: React.FC<CosmosExploreGridProps> = ({
       shortDesc: "A vast interstellar cauldron where gravitational Jeans collapse compresses cold molecular clouds into protostellar cores, triggering first thermonuclear light.",
       image: cosmicStellarNebula,
       metrics: '1,344 Ly • 10M Kelvin Core • Circumstellar Disks',
+      astroExposure: '107PHQ APO · 54x 300s · Antlia SHO',
       onAction: () => onNavigateToChapter('episode-02'),
       actionText: 'Read Episode 02: Stellar Nurseries',
       secondaryAction: () => onNavigateToStarMap({ dsoId: 'm42' }),
@@ -263,6 +278,7 @@ export const CosmosExploreGrid: React.FC<CosmosExploreGridProps> = ({
       shortDesc: "Our celestial companion preserving Earth's axial tilt and generating life-giving ocean tides. An impact-sculpted archive preserving four billion years of solar system history.",
       image: celestialMoon,
       metrics: '384,400 km • 1.62 m/s² Gravity • 27.3 Day Orbit',
+      astroExposure: 'Mewlon-250 · Lucky Imaging 120 FPS',
       onAction: () => onNavigateToPlanet('moon'),
       actionText: 'Launch 3D Moon Model',
       secondaryAction: () => onNavigateToChapter('episode-01'),
